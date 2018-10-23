@@ -11,7 +11,6 @@ public class RoomService {
     RoomRepository roomRepository;
 
     public Iterable<Room> getAllRooms() {
-        System.out.println(roomRepository.findAll());
         return roomRepository.findAll();
     }
 }
