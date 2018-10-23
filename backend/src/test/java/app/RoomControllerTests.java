@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RoomInfoControllerTests {
+public class RoomControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,7 +25,7 @@ public class RoomInfoControllerTests {
     @Test
     public void shouldReturnEmptyList() throws Exception {
 
-        this.mockMvc.perform(get("/getAllRooms"))
+        this.mockMvc.perform(get("/room/getAll"))
                 .andDo(print()).andExpect(status().isOk());
     }
 
