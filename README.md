@@ -1,11 +1,9 @@
 Hotel project 
 
 Install before runnig:
-*Angular
-npm install -g @angular/cli
+-Angular  npm install -g @angular/cli
 
-*MySql
-https://dev.mysql.com/downloads/windows/installer/
+-MySql  https://dev.mysql.com/downloads/windows/installer/
 
 To run the app (backend):
 - go to  /backend
