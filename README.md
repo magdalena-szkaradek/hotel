@@ -15,7 +15,7 @@ To run the app (backend):
 - run `./gradlew build`
 - run `./gradlew bootRun`
 
-Backend is running on port 8080.
+Backend is running on port 8090.
 
 To run the app (frontend):
 - go to /frontend 
