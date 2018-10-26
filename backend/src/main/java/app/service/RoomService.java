@@ -15,4 +15,12 @@ public class RoomService {
     public Iterable<Room> getAllRooms() {
         return roomRepository.findAll();
     }
+
+    public Room addNewRoom(Room room) {
+        return roomRepository.save(room);
+    }
+
+    public void deleteRoom(Integer id) {
+        roomRepository.deleteById(id);
+    }
 }

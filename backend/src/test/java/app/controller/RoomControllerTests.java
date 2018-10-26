@@ -22,7 +22,7 @@ public class RoomControllerTests {
     private MockMvc mockMvc;
 
     @Test
-    public void shouldReturnEmptyList() throws Exception {
+    public void test_getAllRooms_statusShouldBeOK() throws Exception {
 
         this.mockMvc.perform(get("/room/getAll"))
                 .andDo(print()).andExpect(status().isOk());
