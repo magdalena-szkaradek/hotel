@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequestMapping(path="/user")
 public class UserController {
 
@@ -23,6 +24,7 @@ public class UserController {
     }
 
     //register
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addUser")
     public ResponseEntity addNewUser(@RequestBody User user){
         return new ResponseEntity<>(userService.createNewUser(user), HttpStatus.OK);

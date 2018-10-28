@@ -7,6 +7,20 @@ import { HeaderComponentComponent } from './header-component/header-component.co
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponentComponent } from './slider-component/slider-component.component';
 import { SearchComponentComponent } from './search-component/search-component.component';
+import {RouterModule, Routes} from '@angular/router';
+import {HttpModule} from '@angular/http';
+import {FormsModule} from '@angular/forms';
+import { MainComponentComponent } from './components/main-component/main-component.component';
+import {APP_BASE_HREF} from '@angular/common';
+import { UserService } from './services/user.service';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+
+const appRoutes: Routes = [
+  {path:'', component: MainComponentComponent},
+  {path:'register', component: RegisterComponent},
+  {path:'login', component: LoginComponent}
+]
 
 @NgModule({
   declarations: [
@@ -15,12 +29,21 @@ import { SearchComponentComponent } from './search-component/search-component.co
     HeaderComponentComponent,
     FooterComponent,
     SliderComponentComponent,
-    SearchComponentComponent
+    SearchComponentComponent,
+    MainComponentComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    {provide: APP_BASE_HREF, useValue : '/' },
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
