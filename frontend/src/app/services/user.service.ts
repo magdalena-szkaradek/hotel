@@ -12,6 +12,8 @@ export class UserService {
 
   constructor(private http: Http) { }
 
+  public usersBS = new BehaviorSubject<string>(null);
+
   register(user){
     return this.http.post('http://localhost:8090/user/addUser', user).pipe(map(res => res.json()))
   }
@@ -20,4 +22,8 @@ export class UserService {
     return this.http.post('http://localhost:8090/user/login', user).pipe(map(res => res.json()))
   }
 
+  getUsers(){
+    return this.http.get('http://localhost:8090/user/getAllUsers').pipe(map(res => res.json()))
+   
+   }
 }

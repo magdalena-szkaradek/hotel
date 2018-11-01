@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  userExists: boolean = false;
+
   constructor(
     private userService: UserService,
     private router: Router
@@ -19,14 +21,18 @@ export class RegisterComponent implements OnInit {
   }
 
   register({value,valid}){
+
     if (valid){
 
-      this.userService.register(value).subscribe(res => {
-
-        localStorage.setItem("userRegistered", "true");
-        this.router.navigateByUrl('login');
-        //check if user exists
-      });
+      this.userService.register(value).subscribe(res => {   
+          localStorage.setItem("userRegistered", "true");
+          this.router.navigateByUrl('login');
+      },
+      error => {
+        this.userExists = true;
+        console.log("An error occured");       
+    }
+      );
     }else{
       console.log('Form is not valid');
     }

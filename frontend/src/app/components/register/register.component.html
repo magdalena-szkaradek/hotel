@@ -1,6 +1,10 @@
 
 <h1 class="page-title">Register</h1>
 
+<div class="alert alert-danger" *ngIf="userExists">
+  <p>That username already exists, choose another!</p>
+</div>
+
 <form novalidate #f="ngForm" (ngSubmit)="register(f)">
 
   <div class="form-group">

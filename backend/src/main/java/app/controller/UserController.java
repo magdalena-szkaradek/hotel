@@ -30,7 +30,23 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addUser")
     public ResponseEntity addNewUser(@RequestBody User user){
-        return new ResponseEntity<>(userService.createNewUser(user), HttpStatus.OK);
+
+        Iterable<User> savedUsers = userService.getAllUsers();
+
+       boolean isUserRegisteredWithTheSameCredentials = false;
+
+        for(User users: savedUsers){
+            if (users.equals(user)) {
+                isUserRegisteredWithTheSameCredentials = true;
+            }
+        }
+
+        if(isUserRegisteredWithTheSameCredentials){
+            return new ResponseEntity<>("User exists", HttpStatus.CONFLICT);
+        }else{
+            return new ResponseEntity<>(userService.createNewUser(user), HttpStatus.OK);
+
+        }
     }
 
     //get user by id
