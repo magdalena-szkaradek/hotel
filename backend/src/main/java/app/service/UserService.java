@@ -29,4 +29,8 @@ public class UserService {
         return userRepository.findById(user_id);
      }
 
+     public Optional<String> findByUserNameAndPass(String userName, String userPassword){
+         return userRepository.findByUserNameAndPassword(userName, userPassword);
+     }
+
 }

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem("user")) this.router.navigateByUrl('');
   }
 
   register({value,valid}){
@@ -22,6 +23,7 @@ export class RegisterComponent implements OnInit {
 
       this.userService.register(value).subscribe(res => {
 
+        localStorage.setItem("userRegistered", "true");
         this.router.navigateByUrl('login');
         //check if user exists
       });

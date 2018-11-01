@@ -15,11 +15,13 @@ import {APP_BASE_HREF} from '@angular/common';
 import { UserService } from './services/user.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const appRoutes: Routes = [
   {path:'', component: MainComponentComponent},
   {path:'register', component: RegisterComponent},
-  {path:'login', component: LoginComponent}
+  {path:'login', component: LoginComponent},
+  {path:'logout', component: LogoutComponent}
 ]
 
 @NgModule({
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     SearchComponentComponent,
     MainComponentComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

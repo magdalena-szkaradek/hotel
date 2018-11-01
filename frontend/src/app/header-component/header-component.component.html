@@ -12,8 +12,15 @@
         <li><a>Our Rooms</a></li>
         <li class="hidden-xs probootstrap-logo-center"><a><img src="../../assets/img/logo_md.png" class="hires" width="181" height="50" alt="Free Bootstrap Template by uicookies.com"></a></li>
         <li><a>Reservation</a></li>
-        <li><a>Login</a></li>
-        <li><a routerLink="/register">Register</a></li>
+        <!-- <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/register">Register</a></li> -->
+      
+     <!-- <ul *ngIf="!userLoggedIn" class="nav navbar-nav navbar-right">      -->
+        <li *ngIf="!userLoggedIn"><a routerLink="/register">Register</a></li>
+        <li *ngIf="!userLoggedIn"><a routerLink="/login">Login</a></li>
+      <!--</ul> -->
+           
+        <li *ngIf="userLoggedIn"><a routerLink="/logout">Hi, {{user}}, logout</a></li>
       </ul>
     </nav>
   </div>

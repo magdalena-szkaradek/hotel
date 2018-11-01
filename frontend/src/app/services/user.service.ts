@@ -15,4 +15,9 @@ export class UserService {
   register(user){
     return this.http.post('http://localhost:8090/user/addUser', user).pipe(map(res => res.json()))
   }
+
+  login(user){
+    return this.http.post('http://localhost:8090/user/login', user).pipe(map(res => res.json()))
+  }
+
 }
