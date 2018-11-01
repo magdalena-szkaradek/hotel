@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -40,5 +43,9 @@ public class UserController {
         userService.deleteUser(user_id);
     }
 
+    @PostMapping("/login")
+    public Optional<String> loginUser(@RequestBody User user){
+        return userService.findByUserNameAndPass(user.getName(), user.getPassword());
 
+    }
 }
