@@ -1,11 +1,17 @@
-
-<h1 class="page-title">Register</h1>
-
-<div class="alert alert-danger" *ngIf="userExists">
-  <p>That username already exists, choose another!</p>
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>User added.</p>
 </div>
 
-<form novalidate #f="ngForm" (ngSubmit)="register(f)">
+<h1 class="page-title">Add user or an employee</h1>
+
+<div class="alert alert-danger" *ngIf="userExists">
+  <p>That username and password already exists, choose another!</p>
+</div>
+
+<a class="btn btn-primary" routerLink="/admin/users">Back to all users</a>
+<br><br>
+
+<form novalidate #f="ngForm" (ngSubmit)="addUserOrEmployee(f)">
 
   <div class="form-group">
 
@@ -77,17 +83,15 @@
   Minimum length is 4.
 </div>
 
-<input type="hidden" name="employee" [(ngModel)]="employee" value="{{data}}"/>
-
-<!-- <div class="form-group">
+<div class="form-group">
   Is employee
   <input type="employee" class="form-control" placeholder="Password" name="employee" type="checkbox"
   [(ngModel)]="employee"
   /> 
-</div> -->
+</div>
 
 <div class="form-group">
-  <button class="btn btn-default" [disabled]="!f.valid">Register</button>
+  <button class="btn btn-default" [disabled]="!f.valid">Add user</button>
 </div>
 
 

@@ -1,9 +1,6 @@
 package app.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +12,9 @@ public class User {
     private String surname;
     private String email;
     private String password;
+
+    @Column(columnDefinition = "tinyint", nullable = false)
+    private boolean employee;
 
     public Integer getUser_id() {
         return user_id;
@@ -56,6 +56,15 @@ public class User {
         this.password = password;
     }
 
+
+    public boolean isEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(boolean employee) {
+        this.employee = employee;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

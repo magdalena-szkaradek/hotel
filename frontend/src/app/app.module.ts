@@ -16,12 +16,18 @@ import { UserService } from './services/user.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AdminUsersComponent } from './components/admin-users/admin-users.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { AdminAddUserComponent } from './components/admin-add-user/admin-add-user.component';
 
 const appRoutes: Routes = [
   {path:'', component: MainComponentComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
-  {path:'logout', component: LogoutComponent}
+  {path:'logout', component: LogoutComponent},
+  {path:'admin/users', component: AdminUsersComponent},
+  {path:'admin/add-user', component: AdminAddUserComponent}
+
 ]
 
 @NgModule({
@@ -35,7 +41,10 @@ const appRoutes: Routes = [
     MainComponentComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    AdminUsersComponent,
+    AdminNavbarComponent,
+    AdminAddUserComponent
   ],
   imports: [
     BrowserModule,
