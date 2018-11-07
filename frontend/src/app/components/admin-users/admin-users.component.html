@@ -13,6 +13,8 @@
 <table class="table">
   <tr bgcolor="#f9f9f9">
       <th>Name</th>
+      <th>Surname</th>
+      <th>Email</th>
       <th>Is an employee</th>
       <th>Delete</th>
   </tr>
@@ -20,6 +22,12 @@
   <tr *ngFor="let user of users?.value">
       <td>
           {{ user.name }}
+      </td>
+      <td>
+          {{ user.surname }}
+    </td>
+    <td>
+        {{ user.email }}
       </td>
       <td>
         {{ user.employee }}

@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
       this.userService.login(value).subscribe(res => {
        
+        console.log(res);
         if(JSON.stringify(res) == 'null'){
           this.loginFailed = true;
 
