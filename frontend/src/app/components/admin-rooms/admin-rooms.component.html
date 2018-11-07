@@ -1,0 +1,35 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Room deleted.</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Error deleting a room.</p>
+</div>
+
+<h1 class="product-title">Rooms</h1>
+<a class="btn btn-primary" routerLink="/admin/add-room">Add a room</a>
+<br><br>
+
+<table class="table">
+  <tr bgcolor="#f9f9f9">
+      <th>Name</th>
+      <th>Price</th>
+      <th>Beds</th>
+      <th>Delete</th>
+  </tr>
+
+  <tr *ngFor="let room of rooms?.value">
+      <td>
+          {{ room.name }}
+      </td>
+      <td>
+         {{ room.price }}
+     </td>
+     <td>
+        {{ room.beds }}
+     </td>
+      <td>
+          <a (click)="deleteRoom(room.id)" routerLink="/admin/rooms">Delete</a>
+      </td>
+  </tr>
+</table>
