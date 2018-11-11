@@ -5,6 +5,7 @@ import app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +32,10 @@ public class UserService {
 
      public Optional<String> findByUserNameAndPass(String userName, String userPassword){
          return userRepository.findByUserNameAndPassword(userName, userPassword);
+     }
+
+     public Iterable<User> findUsersWhichAreNotEmployees(){
+         return userRepository.findOnlyUsersWhichAreClients();
      }
 
 }

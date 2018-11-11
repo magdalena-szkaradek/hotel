@@ -22,7 +22,9 @@ import { AdminAddUserComponent } from './components/admin-add-user/admin-add-use
 import { AdminRoomsComponent } from './components/admin-rooms/admin-rooms.component';
 import { AdminAddRoomComponent } from './components/admin-add-room/admin-add-room.component';
 import { RoomService } from './services/room.service';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
+import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+import { EmployeeAllClientsComponent } from './components/employee-all-clients/employee-all-clients.component'
 
 
 const appRoutes: Routes = [
@@ -33,7 +35,12 @@ const appRoutes: Routes = [
   {path:'admin/users', component: AdminUsersComponent},
   {path:'admin/add-user', component: AdminAddUserComponent},
   {path:'admin/rooms', component: AdminRoomsComponent},
-  {path:'admin/add-room', component: AdminAddRoomComponent}
+  {path:'admin/add-room', component: AdminAddRoomComponent},
+  {path:'employeeProfile', component: EmployeeProfileComponent},
+  {path:'employeeProfile/employeeAllClients', component: EmployeeAllClientsComponent}
+
+
+
 
 ]
 
@@ -53,7 +60,9 @@ const appRoutes: Routes = [
     AdminNavbarComponent,
     AdminAddUserComponent,
     AdminRoomsComponent,
-    AdminAddRoomComponent
+    AdminAddRoomComponent,
+    EmployeeProfileComponent,
+    EmployeeAllClientsComponent
   ],
   imports: [
     BrowserModule,

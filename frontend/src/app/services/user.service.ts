@@ -30,4 +30,9 @@ export class UserService {
    deleteUser(user_id){
     return this.http.delete('http://localhost:8090/user/delete/' + user_id).pipe(map(res => res.text()))
    }
+
+   getClients(){
+    return this.http.get('http://localhost:8090/user/getClients').pipe(map(res => res.json()))
+   
+   }
 }

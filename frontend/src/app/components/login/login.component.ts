@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   public loginFailed: boolean = false;
   public userRegistered: boolean = false;
+  public isUserAnEmployee: boolean = false;
 
   constructor(
     private router:Router,
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(value).subscribe(res => {
        
         console.log(res);
+           
         if(JSON.stringify(res) == 'null'){
           this.loginFailed = true;
 
@@ -45,14 +47,30 @@ export class LoginComponent implements OnInit {
            }.bind(this), 4000);
 
         }else{
-          localStorage.setItem("user", JSON.stringify(res));
+
+        let LoginResponse = res;    
+        let userResName = JSON.stringify(LoginResponse[0]);
+        let isAnEmployeeRes = JSON.stringify(LoginResponse[1]);
+
+        console.log("aaa"+ isAnEmployeeRes);
+        if(isAnEmployeeRes == "true"){
+          this.isUserAnEmployee = true;
+        }
+  
+          localStorage.setItem("user", userResName);
           if (localStorage.getItem("user") === "\"admin\"") {
             this.router.navigateByUrl('admin/users');
           } else {
-            this.router.navigateByUrl('');
-}
 
-        console.log(JSON.stringify(res));
+            console.log(this.isUserAnEmployee);
+            if(this.isUserAnEmployee == true){           
+              this.router.navigateByUrl('employeeProfile');
+            }else{
+              this.router.navigateByUrl('');
+            }
+          }
+
+        console.log(userResName);
         }
       });
     }else{

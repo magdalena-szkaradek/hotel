@@ -64,4 +64,9 @@ public class UserController {
         return userService.findByUserNameAndPass(user.getName(), user.getPassword());
 
     }
+
+    @GetMapping("/getClients")
+    public Iterable<User> getAllClients(){
+        return userService.findUsersWhichAreNotEmployees();
+    }
 }

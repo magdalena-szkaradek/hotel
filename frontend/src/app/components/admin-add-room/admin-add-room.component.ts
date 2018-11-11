@@ -31,27 +31,6 @@ export class AdminAddRoomComponent implements OnInit {
 
     if (valid){
 
-    //   this.userService.register(value).subscribe(res => {   
-         
-
-    //     this.successMsg = true;
-    //     setTimeout(function() {
-    //       this.successMsg = false;
-    //     }.bind(this),2000);
-
-    //     this.userService.getUsers().subscribe(users => {
-    //       this.userService.usersBS.next(users);
-    //     })
-    //   },
-    //   error => {
-    //     this.userExists = true;
-    //     setTimeout(function() {
-    //       this.userExists = false;
-    //     }.bind(this),2000);
-    //     console.log("An error occured");       
-    // }
-    //   );
-
     if(value.beds < 1){
       console.log("Value can't be lessthan 1");
 

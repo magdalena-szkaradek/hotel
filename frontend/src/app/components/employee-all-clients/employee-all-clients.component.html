@@ -1,0 +1,40 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Client deleted.</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Error deleting a client.</p>
+</div>
+
+<h1 class="product-title">Clients</h1>
+<a class="btn btn-primary" routerLink="/employeeProfile">Back to main page</a>
+
+<br><br>
+
+<table class="table">
+  <tr bgcolor="#f9f9f9">
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Email</th>
+      <th>Is an employee</th>
+      <th>Delete</th>
+  </tr>
+
+  <tr *ngFor="let client of clients?.value">
+      <td>
+          {{ client.name }}
+      </td>
+      <td>
+          {{ client.surname }}
+    </td>
+    <td>
+        {{ client.email }}
+      </td>
+      <td>
+        {{ client.employee }}
+    </td>
+      <td *ngIf="client.name != 'admin'">
+          <a (click)="deleteClient(client.user_id)" routerLink="/employeeProfile/employeeAllClients">Delete</a>
+      </td>
+  </tr>
+</table>
