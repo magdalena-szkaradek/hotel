@@ -16,6 +16,8 @@ public class User {
     @Column(columnDefinition = "tinyint", nullable = false)
     private boolean employee;
 
+    private Integer amountOfReservations;
+
     public Integer getUser_id() {
         return user_id;
     }
@@ -64,6 +66,15 @@ public class User {
     public void setEmployee(boolean employee) {
         this.employee = employee;
     }
+
+    public Integer getAmountOfReservations() {
+        return amountOfReservations;
+    }
+
+    public void setAmountOfReservations(Integer amountOfReservations) {
+        this.amountOfReservations = amountOfReservations;
+    }
+
     
     @Override
     public boolean equals(Object o) {
