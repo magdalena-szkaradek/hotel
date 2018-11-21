@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hotel_db
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,10 +21,10 @@
 
 DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -33,8 +33,72 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (25),(25);
+INSERT INTO `hibernate_sequence` VALUES (3);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `reservation` (
+  `id` int(11) NOT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `payed` tinyint(4) NOT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `room_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`,`room_id`),
+  KEY `room_id` (`room_id`),
+  KEY `user_id` (`user_id`),
+  KEY `FKprn1f85uxtn4638a0xre686l3` (`user_user_id`),
+  CONSTRAINT `FKprn1f85uxtn4638a0xre686l3` FOREIGN KEY (`user_user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
+  CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,'2018-11-21 18:51:50',1,'2018-11-21 18:52:18',1,9,NULL);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservation_id`
+--
+
+DROP TABLE IF EXISTS `reservation_id`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `reservation_id` (
+  `reservation_id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reservation_id` (`reservation_id`),
+  KEY `FKfc2bmpvj3q8jefyhk3688c121` (`room_id`),
+  CONSTRAINT `FKfc2bmpvj3q8jefyhk3688c121` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
+  CONSTRAINT `reservation_id_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation_id`
+--
+
+LOCK TABLES `reservation_id` WRITE;
+/*!40000 ALTER TABLE `reservation_id` DISABLE KEYS */;
+INSERT INTO `reservation_id` VALUES (1,15,1);
+/*!40000 ALTER TABLE `reservation_id` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -43,14 +107,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `room` (
   `id` int(11) NOT NULL,
   `beds` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +123,32 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` VALUES (1,4,'nowy pokoj',15);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `room_reservations`
+--
+
+DROP TABLE IF EXISTS `room_reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `room_reservations` (
+  `room_id` int(11) NOT NULL,
+  `reservations_reservation_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_e384m5yt01uom3hc3o0ge64tu` (`reservations_reservation_id`),
+  KEY `FK9bbpikxhaixawmpk37v76yds2` (`room_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_reservations`
+--
+
+LOCK TABLES `room_reservations` WRITE;
+/*!40000 ALTER TABLE `room_reservations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `room_reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -68,7 +157,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -77,7 +166,7 @@ CREATE TABLE `user` (
   `surname` varchar(255) DEFAULT NULL,
   `employee` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,8 +175,32 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (23,'tttt','ttttt','ttttt','ttttt',0),(22,'ula1','ula1','ula1','ula1',0),(9,'test1','test1','test1','test1',1),(10,'test2','test2','test2','test2',0),(11,'alek','alek','alek','alek',0),(12,'alek1','alek1','alek1','alek1',1),(13,'admin@email.com','admin','pass','admin',0),(14,'employee1','employee1','employee1','employee1',1),(15,'notemployee','notemployee','notemployee','notemployee',0),(16,'employee1','employee2','employee1','employee1',0);
+INSERT INTO `user` VALUES (9,'test1','test1','test1','test1',1),(11,'alek','alek','alek','alek',0),(12,'alek1','alek1','alek1','alek1',1),(13,'admin@email.com','admin','pass','admin',0),(14,'employee1','employee1','employee1','employee1',1),(15,'notemployee','notemployee','notemployee','notemployee',0),(16,'employee1','employee2','employee1','employee1',0),(22,'ula1','ula1','ula1','ula1',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_reservation_list`
+--
+
+DROP TABLE IF EXISTS `user_reservation_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `user_reservation_list` (
+  `user_user_id` int(11) NOT NULL,
+  `reservation_list_reservation_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_o97x90ufsxfumxurobhbeq9mt` (`reservation_list_reservation_id`),
+  KEY `FKgex8d5qugqiixbgehagpsdqii` (`user_user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_reservation_list`
+--
+
+LOCK TABLES `user_reservation_list` WRITE;
+/*!40000 ALTER TABLE `user_reservation_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_reservation_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -99,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 21:44:51
+-- Dump completed on 2018-11-21 23:38:30
