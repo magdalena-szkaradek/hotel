@@ -1,9 +1,6 @@
 package app.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -37,4 +34,17 @@ public class Room {
     public String getName() {
         return name;
     }
+
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
