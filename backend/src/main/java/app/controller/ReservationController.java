@@ -2,6 +2,7 @@ package app.controller;
 
 
 import app.entity.Reservation;
+import app.entity.ReservationDTO;
 import app.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class ReservationController {
 
 
     @PostMapping("/add")
-    public ResponseEntity addNewReservation(@RequestBody Reservation reservation){
+    public ResponseEntity addNewReservation(@RequestBody ReservationDTO reservation){
         return new ResponseEntity<>(reservationService.addNewReservation(reservation), HttpStatus.OK);
     }
 }

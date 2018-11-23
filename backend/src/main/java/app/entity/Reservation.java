@@ -18,6 +18,23 @@ public class Reservation {
 
     private boolean payed;
 
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
+
+    @OneToMany
+    @JoinColumn(name="reservation_id", nullable = false)
+    private List<ReservationId> reservationIdList;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public User getUser() {
         return user;
     }
@@ -26,15 +43,7 @@ public class Reservation {
         this.user = user;
     }
 
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
-    private User user;
 
-
-
-    @OneToMany
-    @JoinColumn(name="reservation_id", nullable = false)
-    private List<ReservationId> reservationIdList;
 
     public Integer getReservation_id() {
         return id;

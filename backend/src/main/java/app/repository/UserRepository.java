@@ -16,7 +16,12 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT t FROM User t where t.employee = false AND t.name <> 'admin' ")
     public Iterable<User> findOnlyUsersWhichAreClients();
 
-  //  Iterable<User> findNotEmployee(boolean isAnEmployee);
+
+    @Query("SELECT user FROM User user where user.user_id = ?1")
+    User finByUserId(Integer userId);
+
+
+    //  Iterable<User> findNotEmployee(boolean isAnEmployee);
 }
 
 
