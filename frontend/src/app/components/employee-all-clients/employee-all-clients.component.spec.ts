@@ -10,7 +10,7 @@ describe('EmployeeAllClientsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ EmployeeAllClientsComponent ]
     })
-    .compileComponents();
+    .compileComponents();  
   }));
 
   beforeEach(() => {

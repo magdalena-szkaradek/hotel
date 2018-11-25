@@ -1,0 +1,36 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>CEmployee deleted.</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Error deleting an employee.</p>
+</div>
+
+<h1 class="product-title">Employees</h1>
+<a class="btn btn-primary" routerLink="/admin/add-employee">Add Employee</a>
+<br><br>
+
+<table class="table">
+  <tr bgcolor="#f9f9f9">
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Email</th>
+      <th>Action</th>
+  </tr>
+
+  <tr *ngFor="let employee of employees?.value">
+      <td>
+          {{ employee.name }}
+      </td>
+      <td>
+          {{ employee.surname }}
+    </td>
+    <td>
+        {{ employee.email }}
+      </td>
+     
+      <td *ngIf="employee.name != 'admin'">
+          <a (click)="deleteUser(employee.user_id)" routerLink="/admin/employees">Delete</a>
+      </td>
+  </tr>
+</table>

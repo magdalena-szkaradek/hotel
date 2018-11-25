@@ -2,13 +2,13 @@
   <p>User added.</p>
 </div>
 
-<h1 class="page-title">Add user or an employee</h1>
+<h1 class="page-title">Add an employee</h1>
 
 <div class="alert alert-danger" *ngIf="userExists">
   <p>That username and password already exists, choose another!</p>
 </div>
 
-<a class="btn btn-primary" routerLink="/admin/users">Back to all users</a>
+<a class="btn btn-primary" routerLink="/admin/employees">Back to all employees</a>
 <br><br>
 
 <form novalidate #f="ngForm" (ngSubmit)="addUserOrEmployee(f)">
@@ -85,13 +85,13 @@
 
 <div class="form-group">
   Is employee
-  <input type="employee" class="form-control" placeholder="Password" name="employee" type="checkbox"
+  <input class="form-control" name="employee" type="checkbox" ng-model="checked" ng-init="checked=true" ng-disabled="checked"
   [(ngModel)]="employee"
   /> 
 </div>
 
 <div class="form-group">
-  <button class="btn btn-default" [disabled]="!f.valid">Add user</button>
+  <button class="btn btn-default" [disabled]="!f.valid">Add employee</button>
 </div>
 
 

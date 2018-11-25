@@ -34,8 +34,10 @@ public class UserService {
          return userRepository.findByUserNameAndPassword(userName, userPassword);
      }
 
-     public Iterable<User> findUsersWhichAreNotEmployees(){
-         return userRepository.findOnlyUsersWhichAreClients();
+     public Iterable<User> getClients(){
+         return userRepository.findClients();
      }
-
+    public Iterable<User> getEmployees(){
+        return userRepository.findEmployees();
+    }
 }

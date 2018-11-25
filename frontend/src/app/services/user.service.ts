@@ -35,4 +35,8 @@ export class UserService {
     return this.http.get('http://localhost:8090/user/getClients').pipe(map(res => res.json()))
    
    }
+   getEmployees(){
+    return this.http.get('http://localhost:8090/user/getEmployees').pipe(map(res => res.json()))
+   
+   }
 }

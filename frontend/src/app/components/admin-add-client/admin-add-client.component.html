@@ -1,0 +1,92 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Client added.</p>
+</div>
+
+<h1 class="page-title">Add client</h1>
+
+<div class="alert alert-danger" *ngIf="userExists">
+  <p>That username and password already exists, choose another!</p>
+</div>
+
+<a class="btn btn-primary" routerLink="/admin/clients">Back to all clients</a>
+<br><br>
+
+<form novalidate #f="ngForm" (ngSubmit)="addUserOrEmployee(f)">
+
+  <div class="form-group">
+
+    <label for="">Name</label>
+        <input type="text" class="form-control" placeholder="Username" name="name" 
+        [(ngModel)]="name"
+        #userName="ngModel"
+        minlength="2"
+        required
+    />
+  </div>
+
+  <div class="alert alert-danger" *ngIf="userName.errors?.required && userName.touched">
+    Username is required.
+</div>
+<div class="alert alert-danger" *ngIf="userName.errors?.minlength && userName.touched">
+    Minimum length is 2.
+</div>
+
+<!--    ------------------------------------------    surname -->
+<div class="form-group">
+<label for="">Surname</label>
+        <input type="text" class="form-control" placeholder="Surname" name="surname" 
+        [(ngModel)]="surname"
+        #userSurname="ngModel"
+        minlength="2"
+        required
+    />
+  </div>
+
+  <div class="alert alert-danger" *ngIf="userSurname.errors?.required && userSurname.touched">
+    Surname is required.
+</div>
+<div class="alert alert-danger" *ngIf="userSurname.errors?.minlength && userSurname.touched">
+    Minimum length is 2.
+</div>
+
+<!--    ------------------------------------------    email -->
+<div class="form-group">
+  <label for="">Email</label>
+  <input type="email" class="form-control" placeholder="Email" name="email" 
+  [(ngModel)]="email"
+  #userEmail="ngModel"
+  minlength="4"
+  required
+  />
+</div>
+<div class="alert alert-danger" *ngIf="userEmail.errors?.required && userEmail.touched">
+  Email is required.
+</div>
+<div class="alert alert-danger" *ngIf="userEmail.errors?.minlength && userEmail.touched">
+  Minimum length is 4.
+</div>
+
+<!--    ------------------------------------------    password -->
+<div class="form-group">
+  <label for="">Password</label>
+  <input type="password" class="form-control" placeholder="Password" name="password" 
+  [(ngModel)]="password"
+  #userPassword="ngModel"
+  minlength="4"
+  required
+  />
+</div>
+<div class="alert alert-danger" *ngIf="userPassword.errors?.required && userPassword.touched">
+  Password is required.
+</div>
+<div class="alert alert-danger" *ngIf="userPassword.errors?.minlength && userPassword.touched">
+  Minimum length is 4.
+</div>
+
+
+<div class="form-group">
+  <button class="btn btn-default" [disabled]="!f.valid">Add Client</button>
+</div>
+
+
+</form>

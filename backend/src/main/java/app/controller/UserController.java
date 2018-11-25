@@ -20,10 +20,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/getAllUsers")
-    public Iterable<User> getAllUsers(){
+    @GetMapping("/getClients")
+    public Iterable<User> getClients(){
+        return userService.getClients();
 
-       return userService.getAllUsers();
+    }
+    @GetMapping("/getEmployees")
+    public Iterable<User> getEmployees(){
+        return userService.getEmployees();
+
     }
 
     //register
@@ -65,8 +70,5 @@ public class UserController {
 
     }
 
-    @GetMapping("/getClients")
-    public Iterable<User> getAllClients(){
-        return userService.findUsersWhichAreNotEmployees();
-    }
+
 }

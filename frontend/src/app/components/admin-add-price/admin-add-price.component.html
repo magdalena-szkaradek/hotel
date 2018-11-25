@@ -1,0 +1,73 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Price added.</p>
+</div>
+
+<h1 class="page-title">Add a season price</h1>
+
+<div class="alert alert-danger" *ngIf="tooSmallRoomsValue">
+  <p>Rooms value can't be less than 1!</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="tooBigRoomsValue">
+    <p>Rooms value can't be bigger than 4!</p>
+  </div>
+
+<a class="btn btn-primary" routerLink="/admin/rooms">Back to all season prices</a>
+
+<section class="probootstrap-section">
+<form  novalidate #f="ngForm"  (ngSubmit)="addAPrice(f)"  class="probootstrap-form">
+
+    <div class="form-group">
+        <label for="price-from">From</label>
+        <div class="form-field">
+          <i class="icon icon-calendar2"></i>
+          <input type="text" class="form-control" id="price-from" placeholder="np. 11/23/2018" name="price-from">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="price-to">To</label>
+        <div class="form-field">
+          <i class="icon icon-calendar2"></i>
+          <input type="text" class="form-control" id="price-to"  placeholder="np. 11/23/2018" name="price-to">
+        </div>
+    </div>
+  
+    
+
+  <!--    ------------------------------------------    price -->
+  <div class="form-group">
+      <label for="">Percent of normal price:</label>
+      <input type="number" class="form-control" placeholder="Percent on normal price" name="percent" [(ngModel)]="percent"  #roomPrice="ngModel" required />      
+  </div>
+
+  <div class="alert alert-danger" *ngIf="roomPrice.errors?.required && roomPrice.touched">
+      Percent is required.
+  </div>
+
+  <!--    ------------------------------------------    name -->
+  <div class="form-group">
+
+    <label for="">Description:</label>
+        <input type="text" class="form-control" placeholder="Description" name="name" 
+        [(ngModel)]="name"
+        #priceName="ngModel"
+        minlength="3"
+        required
+    />
+  </div>
+
+  <div class="alert alert-danger" *ngIf="priceName.errors?.required && priceName.touched">
+    Name is required.
+</div>
+<div class="alert alert-danger" *ngIf="priceName.errors?.minlength && priceName.touched">
+    Minimum length is 3.
+</div>
+
+<div class="form-group">
+  <button class="btn btn-default" [disabled]="!f.valid">Add new season price</button>
+</div>
+
+
+</form>
+</section>
+

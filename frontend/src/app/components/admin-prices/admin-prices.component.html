@@ -1,0 +1,44 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Employee deleted.</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Error deleting a seazon price.</p>
+</div>
+
+<h1 class="product-title">Season Prices</h1>
+<a class="btn btn-primary" routerLink="/admin/add-price">Add a season price</a>
+<br><br>
+
+<table class="table">
+  <tr bgcolor="#f9f9f9">
+      <th>Name</th>
+      <th>Decription</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Value</th>
+      <th>Action</th>
+  </tr>
+
+  <tr *ngFor="let price of prices?.value">
+      <td>
+          {{ price.name }}
+      </td>
+      <td>
+          {{ price.description }}
+    </td>
+    <td>
+        {{ price.form }}
+  </td>
+    <td>
+        {{ price.to }}
+      </td>
+      <td>
+        {{ price.value }}
+  </td>
+     
+      <td>
+          <a (click)="deletePrice(price.price_id)" routerLink="/admin/aprices">Delete</a>
+      </td>
+  </tr>
+</table>

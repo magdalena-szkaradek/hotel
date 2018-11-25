@@ -3,11 +3,11 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-add-user',
-  templateUrl: './admin-add-user.component.html',
-  styleUrls: ['./admin-add-user.component.css']
+  selector: 'app-admin-add-client',
+  templateUrl: './admin-add-client.component.html',
+  styleUrls: ['./admin-add-client.component.css']
 })
-export class AdminAddUserComponent implements OnInit {
+export class AdminAddClientComponent implements OnInit {
 
   userExists: boolean = false;
   successMsg: boolean = false;

@@ -7,8 +7,7 @@
 </div>
 
 <h1 class="product-title">Clients</h1>
-<a class="btn btn-primary" routerLink="/employeeProfile">Back to main page</a>
-
+<a class="btn btn-primary" routerLink="/admin/add-client">Add client</a>
 <br><br>
 
 <table class="table">
@@ -16,7 +15,7 @@
       <th>Name</th>
       <th>Surname</th>
       <th>Email</th>
-      <th>Delete</th>
+      <th>Action</th>
   </tr>
 
   <tr *ngFor="let client of clients?.value">
@@ -29,9 +28,9 @@
     <td>
         {{ client.email }}
       </td>
-
+     
       <td *ngIf="client.name != 'admin'">
-          <a (click)="deleteClient(client.user_id)" routerLink="/employeeProfile/employeeAllClients">Delete</a>
+          <a (click)="deleteUser(client.user_id)" routerLink="/admin/clients">Delete</a>
       </td>
   </tr>
 </table>

@@ -9,7 +9,7 @@ import { RoomService } from 'src/app/services/room.service';
 })
 export class AdminRoomsComponent implements OnInit {
 
-  rooms:any;
+  rooms: any;
   successMsg: boolean = false;
   errorMsg: boolean = false;
 

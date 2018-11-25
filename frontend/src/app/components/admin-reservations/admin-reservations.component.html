@@ -1,0 +1,44 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Reservation deleted.</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Error deleting a resrvation.</p>
+</div>
+
+<h1 class="product-title">Reservations</h1>
+<a class="btn btn-primary" routerLink="/admin/add-reservation">Add reservation</a>
+<br><br>
+
+<table class="table">
+  <tr bgcolor="#f9f9f9">
+      <th>User id</th>
+      <th>Room id</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Payed</th>
+      <th>Action</th>
+  </tr>
+
+  <tr *ngFor="let reservation of reservations?.value">
+      <td>
+          {{reservation.user }}
+      </td>
+      <td>
+          {{ reservation.id }}
+    </td>
+    <td>
+        {{reservation.startDate }}
+  </td>
+    <td>
+        {{ reservation.endDate }}
+      </td>
+       <td>
+        {{ reservation.payed }}
+  </td> 
+     
+      <td>
+          <a (click)="deleteReservation(reservation.id)" routerLink="/admin/reservations">Delete</a>
+      </td>
+  </tr>
+</table>
