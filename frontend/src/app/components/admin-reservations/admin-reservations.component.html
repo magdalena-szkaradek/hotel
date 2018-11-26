@@ -8,22 +8,22 @@
 
 <h1 class="product-title">Reservations</h1>
 <a class="btn btn-primary" routerLink="/admin/add-reservation">Add reservation</a>
-<br><br>
+
 
 <table class="table">
   <tr bgcolor="#f9f9f9">
-      <th>User id</th>
+       <th>User id</th>
       <th>Room id</th>
       <th>From</th>
-      <th>To</th>
+      <th>To</th> 
       <th>Payed</th>
       <th>Action</th>
   </tr>
 
   <tr *ngFor="let reservation of reservations?.value">
       <td>
-          {{reservation.user }}
-      </td>
+          {{reservation.user.name }}
+      </td> 
       <td>
           {{ reservation.id }}
     </td>
@@ -35,7 +35,7 @@
       </td>
        <td>
         {{ reservation.payed }}
-  </td> 
+  </td>  
      
       <td>
           <a (click)="deleteReservation(reservation.id)" routerLink="/admin/reservations">Delete</a>
