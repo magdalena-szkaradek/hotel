@@ -43,9 +43,9 @@ export class AdminEmployeesComponent implements OnInit {
             this.successMsg = false;
         }.bind(this),2000);
 
-          this.userService.getUsers().subscribe(users => {
+          this.userService.getEmployees().subscribe(users => {
             this.userService.usersBS.next(users);
-          })
+          });
 
         },
         error => {
