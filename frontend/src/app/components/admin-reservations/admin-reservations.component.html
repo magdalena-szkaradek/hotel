@@ -12,7 +12,7 @@
 
 <table class="table">
   <tr bgcolor="#f9f9f9">
-       <th>User id</th>
+       <th>Client</th>
       <th>Room id</th>
       <th>From</th>
       <th>To</th> 
@@ -22,7 +22,7 @@
 
   <tr *ngFor="let reservation of reservations?.value">
       <td>
-          {{reservation.user.name }}
+          {{reservation.user.name }} {{reservation.user.surname}}
       </td> 
       <td>
           {{ reservation.id }}
