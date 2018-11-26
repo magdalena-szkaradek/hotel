@@ -1,15 +1,14 @@
 package app.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class ReservationDTO {
     private Integer id;
 
-    private Date startDate;
+    private LocalDate startDate;
 
-    private Date endDate;
+    private LocalDate endDate;
 
     private boolean payed;
 
@@ -25,19 +24,19 @@ public class ReservationDTO {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

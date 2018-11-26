@@ -1,7 +1,7 @@
 package app.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,9 +12,11 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Date startDate;
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    private Date endDate;
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     private boolean payed;
 
@@ -61,19 +63,19 @@ public class Reservation {
         this.reservationIdList = reservationIdList;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

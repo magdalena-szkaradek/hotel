@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -36,14 +35,16 @@ public class ReservationService {
         User user = userRepository.finByUserId(reservationDTO.getUserId());
 
         reservation.setUser(user);
+        reservation.setEndDate(reservationDTO.getEndDate());
+        reservation.setStartDate(reservationDTO.getStartDate());
+        reservation.setPayed(reservationDTO.isPayed());
 
         List<ReservationId> reservationIdList = new ArrayList<>();
 
         for(Integer roomNumber : reservationDTO.getRooms()){
             ReservationId reservationId = new ReservationId();
-            Optional<Room> roomOptional = roomRepository.findById(roomNumber);
-            Room room = roomOptional.get();
-            reservationId.setRoom(room);
+            roomRepository.findById(roomNumber)
+                    .ifPresent(reservationId::setRoom);
             reservationIdList.add(reservationId);
         }
         reservation.setReservationIdList(reservationIdList);
