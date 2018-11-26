@@ -22,7 +22,7 @@ public class Reservation {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="reservation_id", nullable = false)
     private List<ReservationId> reservationIdList;
 

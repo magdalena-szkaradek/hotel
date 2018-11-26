@@ -5,7 +5,9 @@ import app.repository.ReservationIdRepository;
 import app.repository.ReservationRepository;
 import app.repository.RoomRepository;
 import app.repository.UserRepository;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -56,4 +58,7 @@ public class ReservationService {
         return savedReservation;
     }
 
+    public void deleteReservation(Integer reservationId) {
+        reservationRepository.deleteById(reservationId);
+    }
 }

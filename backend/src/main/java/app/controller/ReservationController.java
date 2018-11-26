@@ -28,4 +28,10 @@ public class ReservationController {
     public ResponseEntity addNewReservation(@RequestBody ReservationDTO reservation){
         return new ResponseEntity<>(reservationService.addNewReservation(reservation), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void removeReservation(@PathVariable("id") Integer reservationId){
+        reservationService.deleteReservation(reservationId);
+    }
+
 }
