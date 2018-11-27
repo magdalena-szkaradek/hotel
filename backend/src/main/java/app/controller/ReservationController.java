@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -32,6 +34,11 @@ public class ReservationController {
     @DeleteMapping("/delete/{id}")
     public void removeReservation(@PathVariable("id") Integer reservationId){
         reservationService.deleteReservation(reservationId);
+    }
+
+    @GetMapping("/get/{userId}")
+    public List<Reservation> getReservationForUser(@PathVariable("userId") Integer userId){
+        return reservationService.getReservationForUser(userId);
     }
 
 }
