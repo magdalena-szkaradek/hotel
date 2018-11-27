@@ -33,7 +33,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (26);
+INSERT INTO `hibernate_sequence` VALUES (27);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,6 +122,32 @@ INSERT INTO `room` VALUES (1,4,'nowy pokoj',15),(255,3,'lala',30);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `season_price`
+--
+
+DROP TABLE IF EXISTS `season_price`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `season_price` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `percentage` int(3) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `season_price`
+--
+
+LOCK TABLES `season_price` WRITE;
+/*!40000 ALTER TABLE `season_price` DISABLE KEYS */;
+/*!40000 ALTER TABLE `season_price` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -158,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-26 18:38:59
+-- Dump completed on 2018-11-27 23:48:21
