@@ -529,6 +529,16 @@
 		  'format': 'm/d/yyyy',
 		  'autoclose': true
 		});
+
+    $('#price-from').datepicker({
+      'format': 'm/d/yyyy',
+      'autoclose': true
+    });
+
+    $('#price-to').datepicker({
+      'format': 'm/d/yyyy',
+      'autoclose': true
+    });
 	};
 
 	/*----------------------------------------
