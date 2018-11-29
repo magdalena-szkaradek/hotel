@@ -17,6 +17,8 @@ public class User {
     private String email;
     private String password;
 
+    private Integer amount_of_reservations;
+
     @Column(columnDefinition = "tinyint", nullable = false)
     private boolean employee;
 
@@ -86,7 +88,13 @@ public class User {
     }
 
 
+    public Integer getAmount_of_reservations() {
+        return amount_of_reservations;
+    }
 
+    public void setAmount_of_reservations(Integer amount_of_reservations) {
+        this.amount_of_reservations = amount_of_reservations;
+    }
 }
 
 

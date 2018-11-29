@@ -33,7 +33,7 @@ public class ReservationService {
     public Reservation addNewReservation(ReservationDTO reservationDTO){
         Reservation reservation = new Reservation();
         User user = userRepository.finByUserId(reservationDTO.getUserId());
-
+        user.setAmount_of_reservations(user.getAmount_of_reservations() + 1);
         reservation.setUser(user);
         reservation.setEndDate(reservationDTO.getEndDate());
         reservation.setStartDate(reservationDTO.getStartDate());
