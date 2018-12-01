@@ -29,24 +29,6 @@ export class AdminAddPricesComponent implements OnInit {
 
     if (valid){
 
-    if(value.beds < 1){
-      console.log("Value can't be lessthan 1");
-
-      this.tooSmallRoomsValue = true;
-
-      setTimeout(function() {
-        this.tooSmallRoomsValue = false;
-      }.bind(this),2000);
-
-    }else if(value.beds > 4){
-      console.log("Value can't be grater than 4");
-
-      this.tooBigRoomsValue = true;
-
-      setTimeout(function() {
-        this.tooBigRoomsValue = false;
-      }.bind(this),2000);
-    }else{
       console.log("This is a proper value");
       this.pricesService.addAPrice(value).subscribe(res => {
 
@@ -60,8 +42,7 @@ export class AdminAddPricesComponent implements OnInit {
       })
 
     })
-    }
-   
+    
     }else{
       console.log('Form is not valid');
     }

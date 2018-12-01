@@ -12,17 +12,16 @@
 
 <table class="table">
   <tr bgcolor="#f9f9f9">
-      <th>Name</th>
+     
       <th>From</th>
       <th>To</th>
       <th>Percent of original price</th>
+      <th>Name</th>
       <th>Action</th>
   </tr>
 
   <tr *ngFor="let price of prices?.value">
-      <td>
-          {{ price.name }}
-      </td>
+      
     
     <td>
         {{ price.startDate }}
@@ -33,6 +32,9 @@
       <td>
         {{ price.percentage }}
   </td>
+  <td>
+    {{ price.name }}
+</td>
      
       <td>
           <a (click)="deletePrice(price.id)" routerLink="/admin/prices">Delete</a>
