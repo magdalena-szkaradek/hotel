@@ -22,8 +22,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT user FROM User user where user.user_id = ?1")
     User finByUserId(Integer userId);
 
-    @Query("SELECT user.amount_of_reservations FROM User user where user.user_id =:userId")
-    Integer getAmountOfReservation(@Param("userId") Integer userId);
+    @Query("SELECT user.amount_of_reservations FROM User user where user.user_id = ?1")
+    Integer getAmountOfReservation(Integer userId);
 
 }
 
