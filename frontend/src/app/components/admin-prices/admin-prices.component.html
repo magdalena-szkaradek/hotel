@@ -13,10 +13,9 @@
 <table class="table">
   <tr bgcolor="#f9f9f9">
       <th>Name</th>
-      <th>Decription</th>
       <th>From</th>
       <th>To</th>
-      <th>Value</th>
+      <th>Percent of original price</th>
       <th>Action</th>
   </tr>
 
@@ -24,17 +23,15 @@
       <td>
           {{ price.name }}
       </td>
-      <td>
-          {{ price.description }}
-    </td>
+    
     <td>
-        {{ price.form }}
+        {{ price.startDate }}
   </td>
     <td>
-        {{ price.to }}
+        {{ price.endDate }}
       </td>
       <td>
-        {{ price.value }}
+        {{ price.percentage }}
   </td>
      
       <td>

@@ -26,11 +26,11 @@ export class AdminPricesComponent implements OnInit {
       this.router.navigateByUrl('');
     } 
     
-    // this.userService.getPrices.subscribe(prices => {
-    //   this.userService.usersBS.next(prices);
-    //   this.prices = this.userService.usersBS;
+    this.priceService.getPrices().subscribe(prices => {
+      this.priceService.pricesBS.next(prices);
+      this.prices = this.priceService.pricesBS;
 
-    // });
+    });
   }
 
   deletePrice(price_id) {
