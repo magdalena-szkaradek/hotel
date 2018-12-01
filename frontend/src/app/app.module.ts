@@ -33,7 +33,6 @@ import { EmployeeProfileComponent } from './components/employee-profile/employee
 import { EmployeeAllClientsComponent } from './components/employee-all-clients/employee-all-clients.component'
 
 
-
 const appRoutes: Routes = [
   {path:'', component: MainComponentComponent},
   {path:'register', component: RegisterComponent},
@@ -83,7 +82,8 @@ const appRoutes: Routes = [
     HttpModule,
     FormsModule,
     CustomFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue : '/' },

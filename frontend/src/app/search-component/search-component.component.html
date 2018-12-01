@@ -3,25 +3,39 @@
     <div class="row probootstrap-gutter40">
       <div class="col-md-8">
         <h2 class="mt0">Search Form</h2>
-        <form action="#" method="post" class="probootstrap-form">
+        <form novalidate #f="ngForm" (ngSubmit)="searchForFreeRooms(f)" class="probootstrap-form">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="date-arrival">Arrival</label>
                 <div class="form-field">
-                  <i class="icon icon-calendar2"></i>
-                  <input type="text" class="form-control" id="date-arrival" name="date-arrival">
+                  
+                  <input type="date" class="form-control"
+                  name="arrival"
+                  [(ngModel)]="arrival"
+                  #userArrival="ngModel"       
+                  required>
                 </div>
               </div>
+              <div class="alert alert-danger" *ngIf="userArrival.errors?.required && userArrival.touched">
+                You must specify arrival date.
+            </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="date-departure">Departure</label>
                 <div class="form-field">
-                  <i class="icon icon-calendar2"></i>
-                  <input type="text" class="form-control" id="date-departure" name="date-departure">
+                  <input type="date" class="form-control" 
+                  name="departure"
+                  [(ngModel)]="departure"
+                  #userDeparture="ngModel"       
+                  required
+                 >
                 </div>
               </div>
+              <div class="alert alert-danger" *ngIf="userDeparture.errors?.required && userDeparture.touched">
+                You must specify departure date.
+            </div>
             </div>
           </div>
           <div class="row mb30">
