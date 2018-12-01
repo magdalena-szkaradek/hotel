@@ -23,10 +23,6 @@ export class AdminReservationsComponent implements OnInit {
 
   ngOnInit() {
 
-    if (localStorage.getItem("user") !== "\"admin\"") {
-      this.router.navigateByUrl('');
-    }
-
     this.reservationService.getReservations().subscribe(reservations => {
       this.reservationService.reservationBS.next(reservations);
       this.reservations = this.reservationService.reservationBS;
