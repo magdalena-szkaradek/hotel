@@ -31,6 +31,9 @@ import { RoomService } from './services/room.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
 import { EmployeeAllClientsComponent } from './components/employee-all-clients/employee-all-clients.component'
+import { ClientProfileComponent } from './components/client-profile/client-profile.component';
+import { UserReservationsComponent } from './components/user-reservations/user-reservations.component';
+
 
 
 const appRoutes: Routes = [
@@ -48,7 +51,9 @@ const appRoutes: Routes = [
   {path:'admin/rooms', component: AdminRoomsComponent},
   {path:'admin/add-room', component: AdminAddRoomComponent},
   {path:'employeeProfile', component: EmployeeProfileComponent},
-  {path:'employeeProfile/employeeAllClients', component: EmployeeAllClientsComponent}
+  {path:'employeeProfile/employeeAllClients', component: EmployeeAllClientsComponent},
+  {path:'clientProfile', component: ClientProfileComponent},
+  {path:'clientProfile/reservations', component: UserReservationsComponent},
 ]
 
 @NgModule({
@@ -74,7 +79,9 @@ const appRoutes: Routes = [
     AdminRoomsComponent,
     AdminAddRoomComponent,
     EmployeeProfileComponent,
-    EmployeeAllClientsComponent
+    EmployeeAllClientsComponent,
+    ClientProfileComponent,
+    UserReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,8 +89,7 @@ const appRoutes: Routes = [
     HttpModule,
     FormsModule,
     CustomFormsModule,
-    RouterModule.forRoot(appRoutes),
-    
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue : '/' },
