@@ -3,8 +3,8 @@ package app.repository;
 import app.entity.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
@@ -22,8 +22,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT user FROM User user where user.user_id = ?1")
     User finByUserId(Integer userId);
 
+    @Query("SELECT user.amount_of_reservations FROM User user where user.user_id =:userId")
+    Integer getAmountOfReservation(@Param("userId") Integer userId);
 
-    //  Iterable<User> findNotEmployee(boolean isAnEmployee);
 }
 
 
