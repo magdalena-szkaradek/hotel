@@ -33,7 +33,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (27);
+INSERT INTO `hibernate_sequence` VALUES (29);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'2018-11-21 18:51:50',1,'2018-11-21 18:52:18',9);
+INSERT INTO `reservation` VALUES (1,'2018-11-21 18:51:50',1,'2018-11-21 18:52:18',9),(28,'2015-03-01 00:00:00',1,'2015-03-01 00:00:00',22);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `reservation_id` (
 
 LOCK TABLES `reservation_id` WRITE;
 /*!40000 ALTER TABLE `reservation_id` DISABLE KEYS */;
-INSERT INTO `reservation_id` VALUES (1,15,1);
+INSERT INTO `reservation_id` VALUES (1,15,1),(28,27,255);
 /*!40000 ALTER TABLE `reservation_id` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,6 +161,7 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `employee` tinyint(1) DEFAULT '0',
+  `amount_of_reservations` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -171,7 +172,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (9,'test1','test1','test1','test1',1),(12,'alek1','alek1','alek1','alek1',1),(13,'admin@email.com','admin','pass','admin',0),(14,'employee1','employee1','employee1','employee1',1),(16,'employee1','employee2','employee1','employee1',0),(22,'ula1','ula1','ula1','ula1',0);
+INSERT INTO `user` VALUES (9,'test1','test1','test1','test1',1,0),(12,'alek1','alek1','alek1','alek1',1,0),(13,'admin@email.com','admin','pass','admin',0,1),(14,'employee1','employee1','employee1','employee1',1,0),(16,'employee1','employee2','employee1','employee1',0,1),(22,'ula1','ula1','ula1','ula1',0,2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -184,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-27 23:48:21
+-- Dump completed on 2018-11-29 23:35:32

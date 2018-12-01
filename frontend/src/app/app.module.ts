@@ -41,7 +41,7 @@ const appRoutes: Routes = [
   {path:'admin/clients', component: AdminClientsComponent},
   {path:'admin/employees', component: AdminEmployeesComponent},
   {path:'admin/prices', component: AdminPricesComponent},
-  {path:'admin/reservations', component: AdminReservationsComponent},
+  {path:'employeeProfile/reservations', component: AdminReservationsComponent},
   {path:'admin/add-employee', component: AdminAddEmployeeComponent},
   {path:'admin/add-client', component: AdminAddClientComponent},
   {path:'admin/add-price', component: AdminAddPricesComponent},
