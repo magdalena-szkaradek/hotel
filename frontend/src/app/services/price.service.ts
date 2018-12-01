@@ -22,8 +22,8 @@ export class PricesService {
     return this.http.delete('http://localhost:8090/seasonPrice/delete/' + id).pipe(map(res => res.text()))
    }
 
-   addAPrice(reservation){
-    return this.http.post('http://localhost:8090/seasonPrice/add', reservation).pipe(map(res => res.json()))
+   addAPrice(seasonPrice){
+    return this.http.post('http://localhost:8090/seasonPrice/add', seasonPrice).pipe(map(res => res.json()))
   }
 
 }

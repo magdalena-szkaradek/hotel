@@ -33,10 +33,10 @@ export class AdminPricesComponent implements OnInit {
     });
   }
 
-  deletePrice(price_id) {
+  deletePrice(id) {
     if (confirm('Confirm deletion')) {
 
-        this.priceService.deletePrice(price_id).subscribe(res => {
+        this.priceService.deletePrice(id).subscribe(res => {
 
         this.successMsg = true;
         setTimeout(function() {
