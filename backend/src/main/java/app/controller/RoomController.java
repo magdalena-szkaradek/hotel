@@ -35,7 +35,7 @@ public class RoomController {
         roomService.deleteRoom(id);
     }
 
-    @GetMapping("/searchBy")
+    @PostMapping("/searchBy")
     public SearchResultsDTO searchByCriteria(@RequestBody SearchCriteriaDTO searchCriteriaDTO){
         return roomService.searchByCriteria(searchCriteriaDTO);
     }
