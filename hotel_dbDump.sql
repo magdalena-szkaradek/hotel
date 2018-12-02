@@ -33,7 +33,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (29);
+INSERT INTO `hibernate_sequence` VALUES (31);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,6 +50,7 @@ CREATE TABLE `reservation` (
   `payed` tinyint(4) NOT NULL,
   `start_date` datetime DEFAULT NULL,
   `user_id` int(11) NOT NULL,
+  `total_price` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
@@ -62,7 +63,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'2018-11-21 18:51:50',1,'2018-11-21 18:52:18',9),(28,'2015-03-01 00:00:00',1,'2015-03-01 00:00:00',22);
+INSERT INTO `reservation` VALUES (1,'2018-11-21 18:51:50',1,'2018-11-21 18:52:18',9,0),(28,'2015-03-01 00:00:00',1,'2015-03-01 00:00:00',22,0);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +107,7 @@ CREATE TABLE `room` (
   `id` int(11) NOT NULL,
   `beds` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `price` int(11) NOT NULL,
+  `price` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,6 +145,7 @@ CREATE TABLE `season_price` (
 
 LOCK TABLES `season_price` WRITE;
 /*!40000 ALTER TABLE `season_price` DISABLE KEYS */;
+INSERT INTO `season_price` VALUES (30,'2018-12-05','2018-12-08',150,'test1');
 /*!40000 ALTER TABLE `season_price` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-01 23:27:35
+-- Dump completed on 2018-12-02 23:35:57
