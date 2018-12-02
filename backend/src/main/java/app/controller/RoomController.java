@@ -37,6 +37,11 @@ public class RoomController {
 
     @PostMapping("/searchBy")
     public SearchResultsDTO searchByCriteria(@RequestBody SearchCriteriaDTO searchCriteriaDTO){
+        System.out.println("=======================================================================");
+
+        System.out.println(roomService.searchByCriteria(searchCriteriaDTO));
+        System.out.println("/////////////////////////////////////////////////////////////////////////");
+
         return roomService.searchByCriteria(searchCriteriaDTO);
     }
 }

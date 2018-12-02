@@ -9,7 +9,9 @@ import { RoomService } from '../services/room.service';
 })
 export class SearchComponentComponent implements OnInit {
 
+  isTableShown: boolean = false;
   availRooms: any;
+
   constructor(
     private roomService: RoomService
   ) {   
@@ -18,23 +20,33 @@ export class SearchComponentComponent implements OnInit {
   ngOnInit() {
   }
  
-
   searchForFreeRooms({value,valid}){
-    
-    console.log(value);
+    let UserID = {
+      "userId": localStorage.getItem("userID")
+    }
+    var merged = Object.assign(UserID, value);
 
-    // if(valid){
+    console.log(merged);
+    if(valid){
 
-    //   this.roomService.availableRooms(value).subscribe(res =>{
+      this.roomService.availableRooms(merged).subscribe(res =>{
+        this.availRooms = res.roomList;
 
+        this.roomService.getRooms().subscribe(rooms => {
+          this.roomService.roomsBS.next(rooms);
+        })
 
-    //     this.roomService.getRooms().subscribe(rooms => {
-    //       this.roomService.roomsBS.next(rooms);
-    //     })
+      })
+    }else{
+      console.log('Searching for available rooms went wrong');
+    }
+  }
 
-    //   })
-    // }else{
-    //   console.log('Searching for available rooms went wrong');
-    // }
+  showTable(){
+    this.isTableShown = true;
+  }
+
+  hideTable(){
+    this.isTableShown = false;
   }
 }

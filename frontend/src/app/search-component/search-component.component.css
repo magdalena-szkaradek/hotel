@@ -1,0 +1,14 @@
+#roomsTable{
+  height: 200px;
+  width: 440px;
+  margin-left: 500px;
+  background-color: #E6E6FA;
+}
+
+#roomsTableButton{
+
+    border-style: solid;
+    margin-left: 550px;
+    background-color: rgb(50, 50, 209);
+    color: white;
+  }

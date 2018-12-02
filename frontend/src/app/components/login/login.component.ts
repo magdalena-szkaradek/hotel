@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
         let userResName = JSON.stringify(LoginResponse[0]);
         let isAnEmployeeRes = JSON.stringify(LoginResponse[1]);
 
+        localStorage.setItem("userID",LoginResponse[2]);
+        console.log("LOCALSTORAGE" + localStorage.getItem("userID"));
+
         console.log("aaa"+ isAnEmployeeRes);
         if(isAnEmployeeRes == "true"){
           this.isUserAnEmployee = true;

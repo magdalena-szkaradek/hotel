@@ -11,13 +11,13 @@
                 <div class="form-field">
                   
                   <input type="date" class="form-control"
-                  name="arrival"
-                  [(ngModel)]="arrival"
-                  #userArrival="ngModel"       
+                  name="startDate"
+                  [(ngModel)]="startDate"
+                  #userStartDate="ngModel"       
                   required>
                 </div>
               </div>
-              <div class="alert alert-danger" *ngIf="userArrival.errors?.required && userArrival.touched">
+              <div class="alert alert-danger" *ngIf="userStartDate.errors?.required && userStartDate.touched">
                 You must specify arrival date.
             </div>
             </div>
@@ -26,14 +26,14 @@
                 <label for="date-departure">Departure</label>
                 <div class="form-field">
                   <input type="date" class="form-control" 
-                  name="departure"
-                  [(ngModel)]="departure"
-                  #userDeparture="ngModel"       
+                  name="endDate"
+                  [(ngModel)]="endDate"
+                  #userEndDate="ngModel"       
                   required
                  >
                 </div>
               </div>
-              <div class="alert alert-danger" *ngIf="userDeparture.errors?.required && userDeparture.touched">
+              <div class="alert alert-danger" *ngIf="userEndDate.errors?.required && userEndDate.touched">
                 You must specify departure date.
             </div>
             </div>
@@ -43,16 +43,46 @@
               <div class="form-group">
                 <label for="guests">Guests</label>
                 <div class="form-field">
-                  <input type="number" name="guests" id="guests" class="form-control">
+                  <input type="number" name="guests" id="guests" class="form-control" min="1" max="50"
+                  [(ngModel)]="guests"
+                  #userGuests="ngModel"       
+                  required>
                 </div>
               </div>
+
+              <div class="alert alert-danger" *ngIf="userGuests.errors?.required && userGuests.touched">
+                You must specify number of guests.
+            </div>
             </div>
           </div>
           <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="Search">
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="Search" (click)="showTable()">
           </div>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+
+<table id="roomsTable" class="table" *ngIf="isTableShown">
+  <tr bgcolor="#f9f9f9">
+      <th>Name</th>
+      <th>Price</th>
+      <th>Beds</th>
+  </tr>
+
+  <tr *ngFor="let room of availRooms">
+      <td>
+        {{room?.name}}
+      </td>
+      <td>
+         {{ room?.price }}
+     </td>
+     <td>
+        {{ room?.beds }}
+     </td>
+  </tr>
+</table>
+
+<button id="roomsTableButton" type="button" *ngIf="isTableShown" (click)="hideTable()"> Hide information about available rooms</button>
