@@ -5,29 +5,28 @@ import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-admin-reservations',
-  templateUrl: './admin-reservations.component.html',
-  styleUrls: ['./admin-reservations.component.css']
+  templateUrl: './user-reservations.component.html',
+  styleUrls: ['./user-reservations.component.css']
 })
-export class AdminReservationsComponent implements OnInit {
+export class UserReservationsComponent implements OnInit {
 
   reservations: any;
   successMsg: boolean = false;
   errorMsg: boolean = false;
 
-
-
   constructor( 
     private router: Router,
     private reservationService: ReservationService
     ) { }
-
+  
   ngOnInit() {
+ 
+  //   this.reservationService.getUserReservation().subscribe(reservations => {
+  //     this.reservationService.reservationBS.next(reservations);
+  //     this.reservations = this.reservationService.reservationBS;
 
-    this.reservationService.getReservations().subscribe(reservations => {
-      this.reservationService.reservationBS.next(reservations);
-      this.reservations = this.reservationService.reservationBS;
-
-    });
+  //   });
+  // }
   }
 
   deleteReservation(id: any) {
