@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
             if(this.isUserAnEmployee == true){           
               this.router.navigateByUrl('employeeProfile');
             }else{
-              this.router.navigateByUrl('');
+              this.router.navigateByUrl('clientProfile');
             }
           }
 
