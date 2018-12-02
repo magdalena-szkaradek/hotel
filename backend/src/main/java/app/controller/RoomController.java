@@ -9,11 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
-@RequestMapping(path="/room")
+@RequestMapping(path = "/room")
 public class RoomController {
 
     @Autowired
@@ -26,18 +24,17 @@ public class RoomController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity addNewRoom(@RequestBody Room room){
+    public ResponseEntity addNewRoom(@RequestBody Room room) {
         return new ResponseEntity<>(roomService.addNewRoom(room), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteRoom(@PathVariable Integer id){
+    public void deleteRoom(@PathVariable Integer id) {
         roomService.deleteRoom(id);
     }
 
     @PostMapping("/searchBy")
-    public SearchResultsDTO searchByCriteria(@RequestBody SearchCriteriaDTO searchCriteriaDTO){
-        System.out.println(roomService.searchByCriteria(searchCriteriaDTO));
+    public SearchResultsDTO searchByCriteria(@RequestBody SearchCriteriaDTO searchCriteriaDTO) {
         return roomService.searchByCriteria(searchCriteriaDTO);
     }
 }

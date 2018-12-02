@@ -13,7 +13,7 @@ public class SearchResultsDTO {
 
     private Integer guests;
 
-    private List<Room> roomList;
+    private List<RoomDTO> roomList;
 
     public LocalDate getStartDate() {
         return startDate;
@@ -47,11 +47,11 @@ public class SearchResultsDTO {
         this.guests = guests;
     }
 
-    public List<Room> getRoomList() {
+    public List<RoomDTO> getRoomList() {
         return roomList;
     }
 
-    public void setRoomList(List<Room> roomList) {
+    public void setRoomList(List<RoomDTO> roomList) {
         this.roomList = roomList;
     }
 }

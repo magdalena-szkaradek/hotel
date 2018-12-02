@@ -1,14 +1,15 @@
 package app.service;
 
-import app.entity.Room;
-import app.entity.SearchCriteriaDTO;
-import app.entity.SearchResultsDTO;
+import app.entity.*;
 import app.repository.ReservationRepository;
 import app.repository.RoomRepository;
+import app.repository.SeasonPriceRepository;
 import app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
+    public static final Integer DISCOUNT_FOR_LOYAL = 10;
 
     @Autowired
     RoomRepository roomRepository;
@@ -25,6 +27,9 @@ public class RoomService {
 
     @Autowired
     ReservationRepository reservationRepository;
+
+    @Autowired
+    SeasonPriceRepository seasonPriceRepository;
 
     public Iterable<Room> getAllRooms() {
         return roomRepository.findAll();
@@ -40,9 +45,59 @@ public class RoomService {
 
     public SearchResultsDTO searchByCriteria(SearchCriteriaDTO searchCriteriaDTO) {
         List<Room> availableRooms = new LinkedList<>();
+        List<RoomDTO> roomDTOList = new ArrayList<>();
 
-        List<Room> roomList = roomRepository.findRoomsWithAccurateNumberOfBeds(searchCriteriaDTO.getGuests());
+        List<Room> roomList = getRoomsWithAccurateNumberOfBeds(searchCriteriaDTO);
 
+        getAvailableRooms(searchCriteriaDTO, availableRooms, roomList);
+
+        List<SeasonPrice> seasonPriceList = getSeasonPrices(searchCriteriaDTO);
+
+        int daysOfReservation = getDaysOfReservation(searchCriteriaDTO);
+
+        for (SeasonPrice seasonPrice : seasonPriceList) {
+            Integer percentage = seasonPrice.getPercentage();
+            int daysWithSeasonPrice = getDaysWithSeasonPrice(searchCriteriaDTO, daysOfReservation, seasonPrice);
+
+            int normalDays = daysOfReservation - daysWithSeasonPrice;
+
+            for (Room room : availableRooms) {
+                double averagePriceWithSeasoningSystem = calculateCostWithSeasoningSystem(daysOfReservation, percentage, daysWithSeasonPrice, normalDays, room, searchCriteriaDTO.getUserId());
+                double averagePriceWithoutSeasoningSystem = calculateCostWithoutSeasoningSystem(daysOfReservation, room, searchCriteriaDTO.getUserId());
+
+                RoomDTO roomDTO = new RoomDTO();
+                roomDTO.setBeds(room.getBeds());
+                roomDTO.setId(room.getId());
+                roomDTO.setName(room.getName());
+                roomDTO.setPricePerNightWithSeasoningSystem(averagePriceWithSeasoningSystem);
+                roomDTO.setPricePerNightWithoutSeasoningSystem(averagePriceWithoutSeasoningSystem);
+                roomDTO.setExtraPaidDays(daysWithSeasonPrice);
+                roomDTO.setNormalPaidDays(normalDays);
+                roomDTO.setSeasoningPercentage(percentage);
+                roomDTOList.add(roomDTO);
+            }
+        }
+
+        SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
+
+        searchResultsDTO.setEndDate(searchCriteriaDTO.getEndDate());
+        searchResultsDTO.setGuests(searchCriteriaDTO.getGuests());
+        searchResultsDTO.setStartDate(searchCriteriaDTO.getStartDate());
+        searchResultsDTO.setRoomList(roomDTOList);
+        searchResultsDTO.setUserId(searchCriteriaDTO.getUserId());
+
+        return searchResultsDTO;
+    }
+
+    private int getDaysOfReservation(SearchCriteriaDTO searchCriteriaDTO) {
+        return (int) ChronoUnit.DAYS.between(searchCriteriaDTO.getStartDate(), searchCriteriaDTO.getEndDate());
+    }
+
+    private List<SeasonPrice> getSeasonPrices(SearchCriteriaDTO searchCriteriaDTO) {
+        return seasonPriceRepository.findApplicableSeasoningPrices(searchCriteriaDTO.getStartDate(), searchCriteriaDTO.getEndDate());
+    }
+
+    private void getAvailableRooms(SearchCriteriaDTO searchCriteriaDTO, List<Room> availableRooms, List<Room> roomList) {
         List<Integer> reservationList = reservationRepository.getRoomsNotAvailable(searchCriteriaDTO.getStartDate(), searchCriteriaDTO.getEndDate())
                 .stream()
                 .flatMap(res -> res.getReservationIdList().stream())
@@ -54,19 +109,67 @@ public class RoomService {
                 availableRooms.add(room);
             }
         }
-        //ToDo Sprawdz sezonowosc
+    }
 
-        boolean isLoyal = userRepository.getAmountOfReservation(searchCriteriaDTO.getUserId()) > 3;
-        //ToDo oblicz cene
+    private List<Room> getRoomsWithAccurateNumberOfBeds(SearchCriteriaDTO searchCriteriaDTO) {
+        return roomRepository.findRoomsWithAccurateNumberOfBeds(searchCriteriaDTO.getGuests());
+    }
+
+    private int getDaysWithSeasonPrice(SearchCriteriaDTO searchCriteriaDTO, int daysOfReservation, SeasonPrice seasonPrice) {
+        int daysWithSeasonPrice = 0;
+
+        if (seasonPrice.getStartDate().isAfter(searchCriteriaDTO.getStartDate())) {
+            if (seasonPrice.getEndDate().isAfter(searchCriteriaDTO.getEndDate())) {
+                daysWithSeasonPrice = (int) ChronoUnit.DAYS.between(seasonPrice.getStartDate(), searchCriteriaDTO.getEndDate());
+            } else if (seasonPrice.getEndDate().isBefore(searchCriteriaDTO.getEndDate())) {
+                daysWithSeasonPrice = (int) ChronoUnit.DAYS.between(seasonPrice.getStartDate(), seasonPrice.getEndDate());
+            }
+        }
+
+        if (seasonPrice.getStartDate().isBefore(searchCriteriaDTO.getStartDate())) {
+            if (seasonPrice.getEndDate().isAfter(searchCriteriaDTO.getEndDate())) {
+                daysWithSeasonPrice = daysOfReservation;
+            } else if (seasonPrice.getEndDate().isBefore(searchCriteriaDTO.getEndDate())) {
+                daysWithSeasonPrice = (int) ChronoUnit.DAYS.between(searchCriteriaDTO.getStartDate(), seasonPrice.getEndDate());
+            }
+        }
+
+        if (seasonPrice.getStartDate().isEqual(searchCriteriaDTO.getStartDate())) {
+            if (searchCriteriaDTO.getEndDate().isBefore(seasonPrice.getEndDate())) {
+                daysWithSeasonPrice = (int) ChronoUnit.DAYS.between(seasonPrice.getStartDate(), searchCriteriaDTO.getEndDate());
+            }
+
+            if (searchCriteriaDTO.getEndDate().isEqual(seasonPrice.getEndDate())) {
+                daysWithSeasonPrice = daysOfReservation;
+            }
+            if (searchCriteriaDTO.getEndDate().isAfter(seasonPrice.getEndDate())) {
+                daysWithSeasonPrice = (int) ChronoUnit.DAYS.between(seasonPrice.getStartDate(), seasonPrice.getEndDate());
+            }
+        }
+        return daysWithSeasonPrice;
+    }
+
+    private double calculateCostWithoutSeasoningSystem(int daysOfReservation, Room room, Integer userId) {
+        Double pricePerNight = room.getPrice();
+        double totalCost = isLoyal(userId) ? applyLoyalDiscount(pricePerNight * daysOfReservation) : (pricePerNight * daysOfReservation);
+        return totalCost / daysOfReservation;
+    }
+
+    private double calculateCostWithSeasoningSystem(int daysOfReservation, Integer percentage, int daysWithSeasonPrice, int normalDays, Room room, Integer userId) {
+        double totalCostWithSeasonPerNight = 0;
+        double normalTimeCost = normalDays * room.getPrice();
+        double specialTimeCost = daysWithSeasonPrice * (room.getPrice() * percentage / 100);
+        double totalCost = isLoyal(userId) ? applyLoyalDiscount(normalTimeCost + specialTimeCost) : (normalTimeCost + specialTimeCost);
+        totalCostWithSeasonPerNight = totalCost / daysOfReservation;
+        return totalCostWithSeasonPerNight;
+    }
 
 
-        SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
-        searchResultsDTO.setEndDate(searchCriteriaDTO.getEndDate());
-        searchResultsDTO.setGuests(searchCriteriaDTO.getGuests());
-        searchResultsDTO.setStartDate(searchCriteriaDTO.getStartDate());
-        searchResultsDTO.setRoomList(availableRooms);
-        searchResultsDTO.setUserId(searchCriteriaDTO.getUserId());
+    private double applyLoyalDiscount(double reservationCost) {
+        return (reservationCost * DISCOUNT_FOR_LOYAL) / 100;
+    }
 
-        return searchResultsDTO;
+    private boolean isLoyal(Integer userId) {
+        return userRepository.getAmountOfReservation(userId) > 3;
     }
 }

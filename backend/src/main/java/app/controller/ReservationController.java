@@ -14,30 +14,30 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
-@RequestMapping(path="/reservation")
+@RequestMapping(path = "/reservation")
 public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
 
     @GetMapping("/getAll")
-    public Iterable<Reservation> getAllReservations(){
+    public Iterable<Reservation> getAllReservations() {
         return reservationService.getAllReservations();
     }
 
 
     @PostMapping("/add")
-    public ResponseEntity addNewReservation(@RequestBody ReservationDTO reservation){
+    public ResponseEntity addNewReservation(@RequestBody ReservationDTO reservation) {
         return new ResponseEntity<>(reservationService.addNewReservation(reservation), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void removeReservation(@PathVariable("id") Integer reservationId){
+    public void removeReservation(@PathVariable("id") Integer reservationId) {
         reservationService.deleteReservation(reservationId);
     }
 
     @GetMapping("/get/{userId}")
-    public List<Reservation> getReservationForUser(@PathVariable("userId") Integer userId){
+    public List<Reservation> getReservationForUser(@PathVariable("userId") Integer userId) {
         return reservationService.getReservationForUser(userId);
     }
 

@@ -11,7 +11,7 @@ public class Room {
 
     private int beds;
 
-    private int price;
+    private Double price;
 
     private String name;
 
@@ -27,7 +27,7 @@ public class Room {
         return beds;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -39,12 +39,11 @@ public class Room {
         this.beds = beds;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
 }

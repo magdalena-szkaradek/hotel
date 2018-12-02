@@ -16,6 +16,8 @@ public class ReservationDTO {
 
     private List<Integer> rooms;
 
+    private List<Double> averageCosts;
+
     public Integer getId() {
         return id;
     }
@@ -62,5 +64,13 @@ public class ReservationDTO {
 
     public void setRooms(List<Integer> rooms) {
         this.rooms = rooms;
+    }
+
+    public List<Double> getAverageCosts() {
+        return averageCosts;
+    }
+
+    public void setAverageCosts(List<Double> averageCosts) {
+        this.averageCosts = averageCosts;
     }
 }

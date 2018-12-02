@@ -20,12 +20,14 @@ public class Reservation {
 
     private boolean payed;
 
+    private Double total_price;
+
     @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name="reservation_id", nullable = false)
+    @JoinColumn(name = "reservation_id", nullable = false)
     private List<ReservationId> reservationIdList;
 
 
@@ -44,7 +46,6 @@ public class Reservation {
     public void setUser(User user) {
         this.user = user;
     }
-
 
 
     public Integer getReservation_id() {
@@ -102,5 +103,13 @@ public class Reservation {
     @Override
     public int hashCode() {
         return Objects.hash(id, startDate, endDate, payed, user);
+    }
+
+    public Double getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(Double total_price) {
+        this.total_price = total_price;
     }
 }

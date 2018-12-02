@@ -8,8 +8,9 @@ import app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -26,27 +27,36 @@ public class ReservationService {
     @Autowired
     ReservationIdRepository reservationIdRepository;
 
-    public Iterable<Reservation> getAllReservations(){
+    public Iterable<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
 
-    public Reservation addNewReservation(ReservationDTO reservationDTO){
+    public Reservation addNewReservation(ReservationDTO reservationDTO) {
         Reservation reservation = new Reservation();
         User user = userRepository.finByUserId(reservationDTO.getUserId());
         user.setAmount_of_reservations(user.getAmount_of_reservations() + 1);
         reservation.setUser(user);
         reservation.setEndDate(reservationDTO.getEndDate());
         reservation.setStartDate(reservationDTO.getStartDate());
-        reservation.setPayed(reservationDTO.isPayed());
+        reservation.setPayed(false);
+        reservation.setTotal_price(reservationDTO.getAverageCosts().stream().reduce(0., Double::sum));
 
-        List<ReservationId> reservationIdList = new ArrayList<>();
 
-        for(Integer roomNumber : reservationDTO.getRooms()){
-            ReservationId reservationId = new ReservationId();
-            roomRepository.findById(roomNumber)
-                    .ifPresent(reservationId::setRoom);
-            reservationIdList.add(reservationId);
-        }
+        List<Room> collect = reservationDTO.getRooms().stream()
+                .map(roomRepository::findById)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+
+        Double totalPrice = collect.stream().mapToDouble(Room::getPrice).sum();
+
+        List<ReservationId> reservationIdList = collect.stream()
+                .map(room -> {
+                    ReservationId reservationId = new ReservationId();
+                    reservationId.setRoom(room);
+                    return reservationId;
+                }).collect(Collectors.toList());
+
+        reservation.setTotal_price(totalPrice);
         reservation.setReservationIdList(reservationIdList);
         reservationIdRepository.saveAll(reservationIdList);
 
