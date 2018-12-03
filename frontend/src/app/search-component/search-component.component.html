@@ -69,7 +69,10 @@
   <tr bgcolor="#f9f9f9">
       <th>Name</th>
       <th>Price</th>
+      <th>Season price</th>
       <th>Beds</th>
+      <th>Extra paid days</th>
+      <th>Normal paid days</th>
   </tr>
 
   <tr *ngFor="let room of availRooms">
@@ -77,11 +80,20 @@
         {{room?.name}}
       </td>
       <td>
-         {{ room?.price }}
+         {{ room?.pricePerNightWithoutSeasoningSystem }}
      </td>
+     <td>
+      {{ room?.pricePerNightWithSeasoningSystem }}
+  </td>
      <td>
         {{ room?.beds }}
      </td>
+     <td>
+      {{ room?.extraPaidDays }}
+   </td>
+   <td>
+    {{ room?.normalPaidDays }}
+ </td>      
   </tr>
 </table>
 
