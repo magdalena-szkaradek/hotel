@@ -11,6 +11,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Query("SELECT t from Reservation t where t.user.user_id =?1 ")
     List<Reservation> findAllByUserId(Integer userId);
 
-    @Query("SELECT t from Reservation t where (t.startDate BETWEEN ?1 and ?2 OR t.endDate between ?1 and ?2)")
+    @Query("SELECT t from Reservation t where (?1 BETWEEN t.startDate and t.endDate OR ?2 BETWEEN t.startDate and t.endDate) OR " +
+            "?1 <= t.startDate AND ?2 >= t.startDate")
     List<Reservation> getRoomsNotAvailable(LocalDate startDate, LocalDate endDate);
 }
