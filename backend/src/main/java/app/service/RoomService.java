@@ -57,19 +57,11 @@ public class RoomService {
 
         if(seasonPriceList.isEmpty()){
             for (Room room : availableRooms) {
-                RoomDTO roomDTO = new RoomDTO();
 
                 double averagePriceWithoutSeasoningSystem = calculateCostWithoutSeasoningSystem(daysOfReservation, room, searchCriteriaDTO.getUserId());
                 int normalDays = daysOfReservation;
 
-                roomDTO.setBeds(room.getBeds());
-                roomDTO.setId(room.getId());
-                roomDTO.setName(room.getName());
-                roomDTO.setPricePerNightWithSeasoningSystem(averagePriceWithoutSeasoningSystem);
-                roomDTO.setPricePerNightWithoutSeasoningSystem(averagePriceWithoutSeasoningSystem);
-                roomDTO.setExtraPaidDays(0);
-                roomDTO.setNormalPaidDays(normalDays);
-                roomDTO.setSeasoningPercentage(0);
+                RoomDTO roomDTO = prepareRoomDTO(room, averagePriceWithoutSeasoningSystem, averagePriceWithoutSeasoningSystem, normalDays, 0, 0);
                 roomDTOList.add(roomDTO);
             }
         }
@@ -84,15 +76,8 @@ public class RoomService {
                 double averagePriceWithSeasoningSystem = calculateCostWithSeasoningSystem(daysOfReservation, percentage, daysWithSeasonPrice, normalDays, room, searchCriteriaDTO.getUserId());
                 double averagePriceWithoutSeasoningSystem = calculateCostWithoutSeasoningSystem(daysOfReservation, room, searchCriteriaDTO.getUserId());
 
-                RoomDTO roomDTO = new RoomDTO();
-                roomDTO.setBeds(room.getBeds());
-                roomDTO.setId(room.getId());
-                roomDTO.setName(room.getName());
-                roomDTO.setPricePerNightWithSeasoningSystem(averagePriceWithSeasoningSystem);
-                roomDTO.setPricePerNightWithoutSeasoningSystem(averagePriceWithoutSeasoningSystem);
-                roomDTO.setExtraPaidDays(daysWithSeasonPrice);
-                roomDTO.setNormalPaidDays(normalDays);
-                roomDTO.setSeasoningPercentage(percentage);
+                RoomDTO roomDTO = prepareRoomDTO(room, averagePriceWithoutSeasoningSystem, averagePriceWithSeasoningSystem, normalDays, daysWithSeasonPrice, percentage);
+
                 roomDTOList.add(roomDTO);
             }
         }
@@ -106,6 +91,20 @@ public class RoomService {
         searchResultsDTO.setUserId(searchCriteriaDTO.getUserId());
 
         return searchResultsDTO;
+    }
+
+    private RoomDTO prepareRoomDTO(Room room, double averagePriceWithoutSeasoningSystem, double averagePriceWithSeasoningSystem,
+                                int normalDays, int extraPaidDays, int seasoningPercentage) {
+        RoomDTO roomDTO = new RoomDTO();
+        roomDTO.setBeds(room.getBeds());
+        roomDTO.setId(room.getId());
+        roomDTO.setName(room.getName());
+        roomDTO.setPricePerNightWithSeasoningSystem(averagePriceWithSeasoningSystem);
+        roomDTO.setPricePerNightWithoutSeasoningSystem(averagePriceWithoutSeasoningSystem);
+        roomDTO.setExtraPaidDays(extraPaidDays);
+        roomDTO.setNormalPaidDays(normalDays);
+        roomDTO.setSeasoningPercentage(seasoningPercentage);
+        return roomDTO;
     }
 
     private int getDaysOfReservation(SearchCriteriaDTO searchCriteriaDTO) {
