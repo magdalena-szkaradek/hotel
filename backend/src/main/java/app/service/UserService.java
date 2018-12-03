@@ -18,6 +18,7 @@ public class UserService {
     }
 
     public User createNewUser(User user) {
+        user.setAmount_of_reservations(0);
         return userRepository.save(user);
     }
 

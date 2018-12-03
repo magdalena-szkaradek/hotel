@@ -18,7 +18,7 @@ export class ReservationService {
    }
 
    getUserReservation(id) {
-    return this.http.get('http://localhost:8090/reservation/get/' + id).pipe(map(res => res.text()));
+    return this.http.get('http://localhost:8090/reservation/get/' + id).pipe(map(res => res.json()));
     }
 
    deleteReservation(id) {

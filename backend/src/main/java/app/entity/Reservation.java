@@ -20,7 +20,8 @@ public class Reservation {
 
     private boolean payed;
 
-    private Double total_price;
+    @Column(name = "total_price")
+    private Double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -105,11 +106,11 @@ public class Reservation {
         return Objects.hash(id, startDate, endDate, payed, user);
     }
 
-    public Double getTotal_price() {
-        return total_price;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotal_price(Double total_price) {
-        this.total_price = total_price;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

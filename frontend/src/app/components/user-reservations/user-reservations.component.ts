@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { Router } from '@angular/router';
-import { ReservationService } from 'src/app/services/reservation.service';
+import {Router} from '@angular/router';
+import {ReservationService} from 'src/app/services/reservation.service';
+import {Reservation} from './Reservation';
 
 @Component({
   selector: 'app-admin-reservations',
@@ -10,23 +11,23 @@ import { ReservationService } from 'src/app/services/reservation.service';
 })
 export class UserReservationsComponent implements OnInit {
 
-  reservations: any;
+  reservations: Reservation[];
   successMsg: boolean = false;
   errorMsg: boolean = false;
 
-  constructor( 
+  constructor(
     private router: Router,
     private reservationService: ReservationService
-    ) { }
-  
-  ngOnInit() {
- 
-  //   this.reservationService.getUserReservation().subscribe(reservations => {
-  //     this.reservationService.reservationBS.next(reservations);
-  //     this.reservations = this.reservationService.reservationBS;
+  ) {
+  }
 
-  //   });
-  // }
+  ngOnInit() {
+    const UserID = {
+      'userId': localStorage.getItem('userID')
+    };
+    this.reservationService.getUserReservation(UserID.userId.toString()).subscribe(reservations => {
+      this.reservations = reservations;
+    });
   }
 
   deleteReservation(id: any) {

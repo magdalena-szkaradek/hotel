@@ -12,31 +12,35 @@
 
 <table class="table">
   <tr bgcolor="#f9f9f9">
-    
-      <th>Reservation id</th>
-      <th>From</th>
-      <th>To</th> 
-      <th>Payed</th>
-      <th>Action</th>
+
+    <th>Reservation id</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Payed</th>
+    <th>Total cost</th>
+    <th>Action</th>
   </tr>
 
-  <tr *ngFor="let reservation of reservations?.value">
-      
-      <td>
-          {{ reservation.id }}
+  <tr *ngFor="let reservation of reservations">
+
+    <td>
+      {{ reservation.id }}
     </td>
     <td>
-        {{reservation.startDate }}
-  </td>
+      {{reservation.startDate }}
+    </td>
     <td>
-        {{ reservation.endDate }}
-      </td>
-       <td>
-        {{ reservation.payed }}
-  </td>  
-     
-      <td>
-          <a (click)="deleteReservation(reservation.id)" routerLink="/admin/reservations">Delete</a>
-      </td>
+      {{ reservation.endDate }}
+    </td>
+    <td>
+      {{ reservation.payed }}
+    </td>
+    <td>
+      {{reservation.totalPrice}}
+    </td>
+
+    <td>
+      <a (click)="deleteReservation(reservation.id)" routerLink="/admin/reservations">Delete</a>
+    </td>
   </tr>
 </table>

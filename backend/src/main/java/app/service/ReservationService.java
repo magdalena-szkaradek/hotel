@@ -39,7 +39,7 @@ public class ReservationService {
         reservation.setEndDate(reservationDTO.getEndDate());
         reservation.setStartDate(reservationDTO.getStartDate());
         reservation.setPayed(false);
-        reservation.setTotal_price(reservationDTO.getAverageCosts().stream().reduce(0., Double::sum));
+        reservation.setTotalPrice(reservationDTO.getAverageCosts().stream().reduce(0., Double::sum));
 
 
         List<Room> collect = reservationDTO.getRooms().stream()
@@ -56,7 +56,7 @@ public class ReservationService {
                     return reservationId;
                 }).collect(Collectors.toList());
 
-        reservation.setTotal_price(totalPrice);
+        reservation.setTotalPrice(totalPrice);
         reservation.setReservationIdList(reservationIdList);
         reservationIdRepository.saveAll(reservationIdList);
 
