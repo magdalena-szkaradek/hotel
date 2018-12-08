@@ -3,21 +3,20 @@
 </div>
 
 <div class="alert alert-danger" *ngIf="errorMsg">
-  <p>Error deleting a resrvation.</p>
+  <p>Error deleting a reservation.</p>
 </div>
 
 <h1 class="product-title">My Reservations</h1>
-<a class="btn btn-primary" routerLink="">Add reservation</a>
-
-
 <table class="table">
   <tr bgcolor="#f9f9f9">
 
     <th>Reservation id</th>
     <th>From</th>
     <th>To</th>
-    <th>Payed</th>
+    <th>Rooms in total</th>
+    <th>Room id(s) and name(s)</th>
     <th>Total cost</th>
+    <th>Payed</th>
     <th>Action</th>
   </tr>
 
@@ -33,14 +32,25 @@
       {{ reservation.endDate }}
     </td>
     <td>
-      {{ reservation.payed }}
+      {{ reservation.reservationIdList.length }}
+    </td>
+    <td >
+      <span *ngFor="let reservationID of reservation.reservationIdList">Id: {{ reservationID.room.id}} - {{ reservationID.room.name}}, </span>
+      
     </td>
     <td>
       {{reservation.totalPrice}}
     </td>
-
     <td>
-      <a (click)="deleteReservation(reservation.id)" routerLink="/admin/reservations">Delete</a>
+      {{ reservation.payed }}
+    </td>
+   
+    <td *ngIf="reservation.startDate > date">
+      <a (click)="deleteReservation(reservation.id)" routerLink="/clientProfile/reservations">Resign</a>
+    </td>
+    <td *ngIf="reservation.startDate < date">
+      <span> Resigning unavailable</span>
     </td>
   </tr>
+ 
 </table>
