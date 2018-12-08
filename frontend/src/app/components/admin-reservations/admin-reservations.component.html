@@ -12,33 +12,49 @@
 
 <table class="table">
   <tr bgcolor="#f9f9f9">
-       <th>Client</th>
-      <th>Room id</th>
-      <th>From</th>
-      <th>To</th> 
-      <th>Payed</th>
-      <th>Action</th>
+    <th>Reservation id</th>
+    <th>Client</th>
+    <th>From</th>
+    <th>To</th> 
+    <th>Rooms in total</th>
+    <th>Room id(s) and name(s)</th>
+    <th>Total cost</th>
+    <th>Payed</th>
+    <th>Action</th>
   </tr>
 
   <tr *ngFor="let reservation of reservations?.value">
-      <td>
-          {{reservation.user.name }} {{reservation.user.surname}}
-      </td> 
-      <td>
-          {{ reservation.id }}
+    <td>
+        {{ reservation.id }}
     </td>
+    <td>
+        {{reservation.user.name }} {{reservation.user.surname}}
+    </td> 
+     
     <td>
         {{reservation.startDate }}
   </td>
     <td>
         {{ reservation.endDate }}
-      </td>
-       <td>
+    </td>
+    <td>
+        {{ reservation.reservationIdList.length }}
+    </td>
+    <td >
+    <span *ngFor="let reservationID of reservation.reservationIdList">Id: {{ reservationID.room.id}} - {{ reservationID.room.name}}, </span>
+    
+    </td>
+    <td>
+        {{reservation.totalPrice}}
+    </td>
+    <td>
         {{ reservation.payed }}
-  </td>  
-     
-      <td>
-          <a (click)="deleteReservation(reservation.id)" routerLink="/employeeProfile/reservations">Delete</a>
-      </td>
+    </td>  
+    <td *ngIf="reservation.startDate > date">
+            <a (click)="deleteReservation(reservation.id)" routerLink="/admin/reservations">Resign</a>
+          </td>
+          <td *ngIf="reservation.startDate < date">
+            <span> Resigning unavailable</span>
+          </td>
   </tr>
 </table>

@@ -13,6 +13,7 @@ export class AdminReservationsComponent implements OnInit {
   reservations: any;
   successMsg: boolean = false;
   errorMsg: boolean = false;
+  date: any;
 
 
 
@@ -26,7 +27,7 @@ export class AdminReservationsComponent implements OnInit {
     this.reservationService.getReservations().subscribe(reservations => {
       this.reservationService.reservationBS.next(reservations);
       this.reservations = this.reservationService.reservationBS;
-
+      this.date = new Date().toISOString();
     });
   }
 
