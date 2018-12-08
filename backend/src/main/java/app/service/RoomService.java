@@ -12,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -189,5 +190,9 @@ public class RoomService {
 
     private boolean isLoyal(Integer userId) {
         return userRepository.getAmountOfReservation(userId) > 3;
+    }
+
+    public Optional<Room> findRoomById(Integer id) {
+        return roomRepository.findById(id);
     }
 }

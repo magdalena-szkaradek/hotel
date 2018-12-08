@@ -64,8 +64,10 @@
   </div>
 </section>
 
-
+<!-- <form novalidate #f="ngForm" (ngSubmit)="reserveRooms(f)"> -->
+    
 <table id="roomsTable" class="table" *ngIf="isTableShown">
+    
   <tr bgcolor="#f9f9f9">
       <th>Name</th>
       <th>Price</th>
@@ -73,17 +75,22 @@
       <th>Beds</th>
       <th>Extra paid days</th>
       <th>Normal paid days</th>
+      <th>Id </th>
   </tr>
-
-  <tr *ngFor="let room of availRooms">
+ 
+   
+  <tr *ngFor="let room of availRooms; let i = index">
+    <!-- <a type="hidden">{{i+1}}</a> -->
+    <input type=hidden name={{i+1}} value={{i+1}}>
       <td>
-        {{room?.name}}
+        <!-- <input type="checkbox" name="tc"  [(ngModel)]="aaa">   -->
+        <a (click)="addRoomReservation(room.id, i)" >Add</a> {{room?.name}}
       </td>
       <td>
          {{ room?.pricePerNightWithoutSeasoningSystem }}
      </td>
      <td>
-      {{ room?.pricePerNightWithSeasoningSystem }}
+     {{ room?.pricePerNightWithSeasoningSystem }}
   </td>
      <td>
         {{ room?.beds }}
@@ -93,8 +100,62 @@
    </td>
    <td>
     {{ room?.normalPaidDays }}
- </td>      
+ </td>  
+ <td>
+    {{ room?.id }}
+ </td>       
   </tr>
 </table>
 
+ 
+<!-- <button class="btn btn-default" [disabled]="!f.valid">Add Client</button> -->
+
+<!-- </form> -->
+<button  id="makeReservationButton" type="button" *ngIf="isTableShown" (click)="makeReservation()"> Make reservation</button>
+
 <button id="roomsTableButton" type="button" *ngIf="isTableShown" (click)="hideTable()"> Hide information about available rooms</button>
+
+
+<!-- <form (ngSubmit)="addUserOrEmployee(f)">
+    <div class="form-group">
+  
+
+        <table id="roomsTable" class="table" *ngIf="isTableShown">
+    
+            <tr bgcolor="#f9f9f9">
+                <th>Name</th>
+                <th>Price</th>
+                <th>Season price</th>
+                <th>Beds</th>
+                <th>Extra paid days</th>
+                <th>Normal paid days</th>
+            </tr>
+           
+             
+            <tr *ngFor="let room of availRooms">
+                <td>
+                   <input type="checkbox" name="tc"  [(ngModel)]="aaa">   
+                  {{room?.name}}
+                </td>
+                <td>
+                   {{ room?.pricePerNightWithoutSeasoningSystem }}
+               </td>
+               <td>
+               {{ room?.pricePerNightWithSeasoningSystem }}
+            </td>
+               <td>
+                  {{ room?.beds }}
+               </td>
+               <td>
+                {{ room?.extraPaidDays }}
+             </td>
+             <td>
+              {{ room?.normalPaidDays }}
+           </td>      
+            </tr>
+          </table>
+  </div>
+  <div>
+        <button type="submit" class="btn btn-primary" id="btnAgregarSelFabricante"><i class="fa fa-save"></i> Add</button>
+  </div>
+</form> -->

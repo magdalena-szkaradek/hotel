@@ -29,5 +29,8 @@ export class RoomService {
   availableRooms(dates){
     return this.http.post('http://localhost:8090/room/searchBy', dates).pipe(map(res => res.json()))
   }
+  addReservation(info){
+    return this.http.post('http://localhost:8090/reservation/add', info).pipe(map(res => res.json()));
+   }
 
 }

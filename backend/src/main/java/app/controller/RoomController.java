@@ -4,6 +4,9 @@ import app.entity.Room;
 import app.entity.SearchCriteriaDTO;
 import app.entity.SearchResultsDTO;
 import app.service.RoomService;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +39,10 @@ public class RoomController {
     @PostMapping("/searchBy")
     public SearchResultsDTO searchByCriteria(@RequestBody SearchCriteriaDTO searchCriteriaDTO) {
         return roomService.searchByCriteria(searchCriteriaDTO);
+    }
+
+    @GetMapping("/getRoomById/{id}")
+    public Optional<Room> findRoom(@PathVariable Integer id){
+        return roomService.findRoomById(id);
     }
 }

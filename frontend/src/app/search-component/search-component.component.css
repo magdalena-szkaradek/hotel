@@ -8,7 +8,15 @@
 #roomsTableButton{
 
     border-style: solid;
-    margin-left: 550px;
+    
     background-color: rgb(50, 50, 209);
     color: white;
+  }
+
+  #makeReservationButton{
+    margin-left: 500px;
+    border-style: solid;
+    background-color: rgb(50, 50, 209);
+    color: white;
+
   }
