@@ -13,6 +13,8 @@
     <th>Reservation id</th>
     <th>From</th>
     <th>To</th>
+    <th>Rooms in total</th>
+    <th>Room id(s) and name(s)</th>
     <th>Total cost</th>
     <th>Payed</th>
     <th>Action</th>
@@ -28,6 +30,13 @@
     </td>
     <td>
       {{ reservation.endDate }}
+    </td>
+    <td>
+      {{ reservation.reservationIdList.length }}
+    </td>
+    <td >
+      <span *ngFor="let reservationID of reservation.reservationIdList">Id: {{ reservationID.room.id}} - {{ reservationID.room.name}}, </span>
+      
     </td>
     <td>
       {{reservation.totalPrice}}
