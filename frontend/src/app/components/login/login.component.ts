@@ -53,22 +53,22 @@ export class LoginComponent implements OnInit {
           let isAnEmployeeRes = JSON.stringify(LoginResponse[1]);
 
           localStorage.setItem('userID', LoginResponse[2]);
-          console.log('LOCALSTORAGE' + localStorage.getItem('userID'));
 
-          console.log('aaa' + isAnEmployeeRes);
           if (isAnEmployeeRes == 'true') {
             this.isUserAnEmployee = true;
+            localStorage.setItem('role', 'employee');
           }
 
           localStorage.setItem('user', userResName);
           if (localStorage.getItem('user') === '"admin"') {
+            localStorage.setItem('role', 'admin');
             this.router.navigateByUrl('admin/clients');
           } else {
 
-            console.log(this.isUserAnEmployee);
-            if (this.isUserAnEmployee == true) {
-              this.router.navigateByUrl('employeeProfile');
+            if (this.isUserAnEmployee) {
+              this.router.navigateByUrl('');
             } else {
+              localStorage.setItem('role', 'user');
               this.router.navigateByUrl('');
             }
           }

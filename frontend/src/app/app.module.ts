@@ -33,8 +33,8 @@ import { EmployeeProfileComponent } from './components/employee-profile/employee
 import { EmployeeAllClientsComponent } from './components/employee-all-clients/employee-all-clients.component';
 import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 import { UserReservationsComponent } from './components/user-reservations/user-reservations.component';
-import { EmployeeSearchComponent} from './employee-search-component/employee-search-component.component';
-
+import { EmployeeSearchComponent } from './employee-search-component/employee-search-component.component';
+import { EmployeeNavbarComponent } from './components/employee-navbar/employee-navbar.component';
 
 const appRoutes: Routes = [
   {path:'', component: MainComponentComponent},
@@ -54,8 +54,8 @@ const appRoutes: Routes = [
   {path:'employeeProfile/employeeAllClients', component: EmployeeAllClientsComponent},
   {path:'clientProfile', component: ClientProfileComponent},
   {path:'clientProfile/reservations', component: UserReservationsComponent},
-  {path:'rooms', component: RoomComponentComponent},
-]
+  {path:'rooms', component: RoomComponentComponent}
+];
 
 @NgModule({
   declarations: [
@@ -83,7 +83,8 @@ const appRoutes: Routes = [
     EmployeeAllClientsComponent,
     ClientProfileComponent,
     UserReservationsComponent,
-    EmployeeSearchComponent
+    EmployeeSearchComponent,
+    EmployeeNavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-
+<app-employee-navbar *ngIf="isEmployee"></app-employee-navbar>
 <app-slider-component></app-slider-component>
-<app-search-component></app-search-component>
+<app-search-component *ngIf="isClient"></app-search-component>
+<app-employee-search-component *ngIf="isEmployee"></app-employee-search-component>
 <app-footer></app-footer>

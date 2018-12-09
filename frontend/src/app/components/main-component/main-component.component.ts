@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-main-component',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-component.component.css']
 })
 export class MainComponentComponent implements OnInit {
+  isClient: boolean;
+  isEmployee: boolean;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.isClient = localStorage.getItem('role') === 'user';
+    this.isEmployee = localStorage.getItem('role') === 'employee';
   }
 
 }
