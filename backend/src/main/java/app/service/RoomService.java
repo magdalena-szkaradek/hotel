@@ -199,7 +199,7 @@ public class RoomService {
 
 
     private double applyLoyalDiscount(double reservationCost) {
-        return (reservationCost * DISCOUNT_FOR_LOYAL) / 100;
+        return (reservationCost * (100 - DISCOUNT_FOR_LOYAL)) / 100;
     }
 
     private boolean isLoyal(Integer userId) {
