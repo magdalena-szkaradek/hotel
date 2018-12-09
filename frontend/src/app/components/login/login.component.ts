@@ -66,10 +66,10 @@ export class LoginComponent implements OnInit {
           } else {
 
             if (this.isUserAnEmployee) {
-              this.router.navigateByUrl('');
+              document.location.href = '/';
             } else {
               localStorage.setItem('role', 'user');
-              this.router.navigateByUrl('');
+              document.location.href = '/';
             }
           }
 
