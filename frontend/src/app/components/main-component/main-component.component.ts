@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-component',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponentComponent implements OnInit {
 
-  constructor() { }
+
+  get userLoggedIn(){
+    if(localStorage.getItem("user")){ //check if user is logged in
+      return true;
+    }
+    return false;
+}
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  login(){
+    this.router.navigateByUrl('login');
   }
 
 }
