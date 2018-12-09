@@ -1,10 +1,13 @@
 package app.service;
 
 import app.entity.User;
+import app.entity.UserDTO;
 import app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +43,17 @@ public class UserService {
 
     public Iterable<User> getEmployees() {
         return userRepository.findEmployees();
+    }
+
+    public List<UserDTO> getAll() {
+        Iterable<User> userIterable = userRepository.findAll();
+        List<UserDTO> userDTOS = new ArrayList<>();
+        userIterable.forEach(element -> {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserId(element.getUser_id());
+            userDTO.setNameAndSurname(element.getName() + " " + element.getSurname());
+            userDTOS.add(userDTO);
+        });
+        return userDTOS;
     }
 }

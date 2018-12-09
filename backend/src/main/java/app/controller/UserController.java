@@ -1,12 +1,14 @@
 package app.controller;
 
 import app.entity.User;
+import app.entity.UserDTO;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -65,6 +67,11 @@ public class UserController {
     public Optional<String> loginUser(@RequestBody User user) {
         return userService.findByUserNameAndPass(user.getName(), user.getPassword());
 
+    }
+
+    @GetMapping("/list")
+    public List<UserDTO> getAll(){
+        return userService.getAll();
     }
 
 
