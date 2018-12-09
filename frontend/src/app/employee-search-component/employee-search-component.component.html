@@ -120,8 +120,7 @@
   </tr>
 </table>
 
-<button  id="makeReservationButton" type="button" *ngIf="isTableShown"  routerLink="/login"> Login to make reservation</button>
-
+<button  id="makeReservationButton" type="button" *ngIf="isTableShown" (click)="makeReservation()"> Make reservation</button> 
 <button id="roomsTableButton" type="button" *ngIf="isTableShown" (click)="hideTable()"> Hide information about available rooms</button>
 <div class="alert alert-success" *ngIf="successMsg">
   <p>Reservation was made.</p>
