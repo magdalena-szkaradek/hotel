@@ -8,6 +8,7 @@ import app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,15 +40,13 @@ public class ReservationService {
         reservation.setEndDate(reservationDTO.getEndDate());
         reservation.setStartDate(reservationDTO.getStartDate());
         reservation.setPayed(false);
-        reservation.setTotalPrice(reservationDTO.getAverageCosts().stream().reduce(0., Double::sum));
-
+        int daysOfReservation = (int) ChronoUnit.DAYS.between(reservationDTO.getStartDate(), reservationDTO.getEndDate());
+        reservation.setTotalPrice(daysOfReservation * reservationDTO.getAverageCosts().stream().reduce(0., Double::sum));
 
         List<Room> collect = reservationDTO.getRooms().stream()
                 .map(roomRepository::findById)
                 .map(Optional::get)
                 .collect(Collectors.toList());
-
-        Double totalPrice = collect.stream().mapToDouble(Room::getPrice).sum();
 
         List<ReservationId> reservationIdList = collect.stream()
                 .map(room -> {
@@ -56,7 +55,6 @@ public class ReservationService {
                     return reservationId;
                 }).collect(Collectors.toList());
 
-        reservation.setTotalPrice(totalPrice);
         reservation.setReservationIdList(reservationIdList);
         reservationIdRepository.saveAll(reservationIdList);
 

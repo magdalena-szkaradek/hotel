@@ -55,6 +55,19 @@
             </div>
             </div>
           </div>
+
+          <div class="row mb30">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="userId">Client</label>
+                <div class="form-field">
+                  <select name="userId" id="userId" class="form-control" [(ngModel)]="selectedUser">
+                    <option *ngFor="let clientDetail of clientsDetails" [value]="clientDetail.userId">{{clientDetail.nameAndSurname}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+          </div>
           <div class="form-group">
             <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="Search" (click)="showTable()">
           </div>

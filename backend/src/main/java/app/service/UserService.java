@@ -46,7 +46,7 @@ public class UserService {
     }
 
     public List<UserDTO> getAll() {
-        Iterable<User> userIterable = userRepository.findAll();
+        Iterable<User> userIterable = userRepository.findClients();
         List<UserDTO> userDTOS = new ArrayList<>();
         userIterable.forEach(element -> {
             UserDTO userDTO = new UserDTO();
