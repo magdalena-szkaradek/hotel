@@ -48,9 +48,9 @@ public class RoomService {
         List<Room> availableRooms = new LinkedList<>();
         List<RoomDTO> roomDTOList = new ArrayList<>();
         List<Room> roomList = new ArrayList<>();
-        if(searchCriteriaDTO.getGuests() > 4){
+        if (searchCriteriaDTO.getGuests() > 4) {
             roomRepository.findAll().forEach(roomList::add);
-        }else{
+        } else {
             roomList = getRoomsWithAccurateNumberOfBeds(searchCriteriaDTO);
         }
 
@@ -60,15 +60,15 @@ public class RoomService {
 
         int daysOfReservation = getDaysOfReservation(searchCriteriaDTO);
 
-        if(searchCriteriaDTO.getGuests() >= 15){
+        if (searchCriteriaDTO.getGuests() >= 15) {
             double priceForGroup = 10;
             for (Room room : availableRooms) {
                 double pricePerRoom = priceForGroup * room.getBeds();
-                RoomDTO roomDTO = prepareRoomDTO(room, pricePerRoom, pricePerRoom, daysOfReservation, 0, 0 );
+                RoomDTO roomDTO = prepareRoomDTO(room, pricePerRoom, pricePerRoom, daysOfReservation, 0, 0);
                 roomDTOList.add(roomDTO);
             }
-        }else {
-            if(seasonPriceList.isEmpty()){
+        } else {
+            if (seasonPriceList.isEmpty()) {
                 for (Room room : availableRooms) {
 
                     double averagePriceWithoutSeasoningSystem = calculateCostWithoutSeasoningSystem(daysOfReservation, room, searchCriteriaDTO.getUserId());
@@ -109,7 +109,7 @@ public class RoomService {
     }
 
     private RoomDTO prepareRoomDTO(Room room, double averagePriceWithoutSeasoningSystem, double averagePriceWithSeasoningSystem,
-                                int normalDays, int extraPaidDays, int seasoningPercentage) {
+                                   int normalDays, int extraPaidDays, int seasoningPercentage) {
         RoomDTO roomDTO = new RoomDTO();
         roomDTO.setBeds(room.getBeds());
         roomDTO.setId(room.getId());
