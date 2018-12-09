@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-component',
@@ -9,11 +10,21 @@ export class MainComponentComponent implements OnInit {
   isClient: boolean;
   isEmployee: boolean;
 
-  constructor() {}
+  get userLoggedIn() {
+    if (localStorage.getItem('user')) {
+      return true;
+    }
+    return false;
+}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.isClient = localStorage.getItem('role') === 'user';
     this.isEmployee = localStorage.getItem('role') === 'employee';
+  }
+
+  login(){
+    this.router.navigateByUrl('login');
   }
 
 }

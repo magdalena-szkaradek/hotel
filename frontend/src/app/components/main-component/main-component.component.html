@@ -2,4 +2,5 @@
 <app-slider-component></app-slider-component>
 <app-search-component *ngIf="isClient"></app-search-component>
 <app-employee-search-component *ngIf="isEmployee"></app-employee-search-component>
+<button  id="myButton" type="button" *ngIf="!userLoggedIn" (click)="login()"> Make reservation</button>
 <app-footer></app-footer>
