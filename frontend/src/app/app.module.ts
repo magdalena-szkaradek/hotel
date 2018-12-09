@@ -30,10 +30,10 @@ import { AdminAddPricesComponent } from './components/admin-add-price/admin-add-
 import { RoomService } from './services/room.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
-import { EmployeeAllClientsComponent } from './components/employee-all-clients/employee-all-clients.component'
+import { EmployeeAllClientsComponent } from './components/employee-all-clients/employee-all-clients.component';
 import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 import { UserReservationsComponent } from './components/user-reservations/user-reservations.component';
-
+import { EmployeeSearchComponent} from './employee-search-component/employee-search-component.component';
 
 
 const appRoutes: Routes = [
@@ -81,7 +81,8 @@ const appRoutes: Routes = [
     EmployeeProfileComponent,
     EmployeeAllClientsComponent,
     ClientProfileComponent,
-    UserReservationsComponent
+    UserReservationsComponent,
+    EmployeeSearchComponent
   ],
   imports: [
     BrowserModule,
