@@ -54,6 +54,7 @@ const appRoutes: Routes = [
   {path:'employeeProfile/employeeAllClients', component: EmployeeAllClientsComponent},
   {path:'clientProfile', component: ClientProfileComponent},
   {path:'clientProfile/reservations', component: UserReservationsComponent},
+  {path:'rooms', component: RoomComponentComponent},
 ]
 
 @NgModule({
