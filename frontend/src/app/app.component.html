@@ -1,10 +1,4 @@
 <app-header-component></app-header-component>
-
 <app-admin-navbar *ngIf="!front"></app-admin-navbar>
-
-<!-- <app-header-component></app-header-component>
-<app-slider-component></app-slider-component>
-<app-search-component></app-search-component>
-<app-room-component></app-room-component>
-<app-footer></app-footer> -->
+<app-employee-navbar *ngIf="isEmployee"></app-employee-navbar>
 <router-outlet></router-outlet>
