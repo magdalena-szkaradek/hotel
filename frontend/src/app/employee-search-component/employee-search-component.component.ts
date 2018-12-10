@@ -39,6 +39,8 @@ export class EmployeeSearchComponent implements OnInit {
   }
 
   searchForFreeRooms({value, valid}) {
+    this.Rooms = [];
+    this.averageCosts = [];
     this.userId = value.userId;
     if (valid) {
       this.beginnigDate = value.startDate;
@@ -66,12 +68,24 @@ export class EmployeeSearchComponent implements OnInit {
     this.isTableShown = false;
   }
 
-  addRoomReservation(id, i) {
-    this.Rooms.push(this.availRooms[i].id);
-    this.averageCosts.push(this.availRooms[i].pricePerNightWithSeasoningSystem);
+  addRoomReservation(room) {
+    this.Rooms.push(room.id);
+    this.averageCosts.push(room.pricePerNightWithSeasoningSystem);
+  }
+
+  removeRoomFromReservation(room) {
+    const roomIndex = this.Rooms.indexOf(room.id);
+    const costIndex = this.averageCosts.indexOf(room.pricePerNightWithSeasoningSystem);
+    if (roomIndex > -1) {
+      this.Rooms.splice(roomIndex, 1);
+    }
+    if (costIndex > -1) {
+      this.averageCosts.splice(costIndex, 1);
+    }
   }
 
   makeReservation() {
+    this.hideTable();
     let UserID = {'userId': Number(this.userId)};
     let resDates = {
       'startDate': this.beginnigDate,

@@ -1,23 +1,24 @@
-#roomsTable{
+#roomsTable {
   height: 200px;
-  width: 440px;
-  margin-left: 500px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
   background-color: #E6E6FA;
+
 }
 
-#roomsTableButton{
+#roomsTableButton {
 
-    border-style: solid;
-    
-    background-color: rgb(50, 50, 209);
-    color: white;
-  }
+  border-style: solid;
 
-  #makeReservationButton{
-    
-    margin-left: 500px;
-    border-style: solid;
-    background-color: rgb(50, 50, 209);
-    color: white;
+  background-color: rgb(50, 50, 209);
+  color: white;
+}
 
-  }
+#makeReservationButton {
+  margin-left: 15%;
+  border-style: solid;
+  background-color: rgb(50, 50, 209);
+  color: white;
+
+}

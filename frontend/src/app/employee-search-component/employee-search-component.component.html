@@ -82,6 +82,7 @@
 <table id="roomsTable" class="table" *ngIf="isTableShown">
     
   <tr bgcolor="#f9f9f9">
+      <th>Action</th>
       <th>Name</th>
       <th>Price</th>
       <th>Season price</th>
@@ -90,15 +91,13 @@
       <th>Normal paid days</th>
       <th>Id </th>
   </tr>
- 
-   
-  <tr *ngFor="let room of availRooms; let i = index">
-    <!-- <a type="hidden">{{i+1}}</a> -->
-    <input type=hidden name={{i+1}} value={{i+1}}>
-      <td>
-        <!-- <input type="checkbox" name="tc"  [(ngModel)]="aaa">   -->
-        <a (click)="addRoomReservation(room.id, i)" >Add</a> {{room?.name}}
-      </td>
+
+
+  <tr *ngFor="let room of availRooms">
+    <td>
+      <button *ngIf="!isRoomAdded(room.id)" type="button" (click)="addRoomReservation(room)">Add room</button>
+      <button *ngIf="isRoomAdded(room.id)" type="button" (click)="removeRoomFromReservation(room)">Remove room</button>
+    </td>
       <td>
          {{ room?.pricePerNightWithoutSeasoningSystem }}
      </td>
