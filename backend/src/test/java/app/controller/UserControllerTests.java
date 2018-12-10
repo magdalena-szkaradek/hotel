@@ -9,12 +9,16 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -64,4 +68,11 @@ public class UserControllerTests {
         return user;
     }
 
+    @Test
+    @Sql(scripts = "classpath:deleteUser.sql", executionPhase = AFTER_TEST_METHOD)
+    @Sql(scripts = "classpath:createUser.sql", executionPhase = BEFORE_TEST_METHOD)
+    public void test_DeleteUser_statusShouldBeOK() throws Exception {
+        this.mockMvc.perform(delete("/user/delete/{user_id}", 1000))
+                .andDo(print()).andExpect(status().isOk());
+    }
 }

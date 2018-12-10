@@ -1,0 +1,1 @@
+delete from season_price where id = 1000;

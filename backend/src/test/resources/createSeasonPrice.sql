@@ -1,0 +1,1 @@
+INSERT INTO hotel_db.season_price (id, start_date, end_date, percentage, name) VALUES (1000, '2018-12-05', '2018-12-08', 150, 'test1');

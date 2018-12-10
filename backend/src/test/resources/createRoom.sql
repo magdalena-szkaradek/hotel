@@ -1,0 +1,1 @@
+INSERT INTO hotel_db.room (id, beds, name, price) VALUES (1000, 2, 'Name', 150);

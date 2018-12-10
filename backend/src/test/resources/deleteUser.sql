@@ -1,0 +1,1 @@
+delete from user where user_id = 1000;

@@ -1,0 +1,1 @@
+delete from reservation where id = 1000;
