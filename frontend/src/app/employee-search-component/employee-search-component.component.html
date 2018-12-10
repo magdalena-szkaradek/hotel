@@ -101,6 +101,7 @@
       <button *ngIf="!isRoomAdded(room.id)" type="button" (click)="addRoomReservation(room)">Add room</button>
       <button *ngIf="isRoomAdded(room.id)" type="button" (click)="removeRoomFromReservation(room)">Remove room</button>
     </td>
+    <td>{{room.name}}</td>
     <td>
       {{ room?.pricePerNightWithoutSeasoningSystem }}
     </td>
