@@ -5,18 +5,23 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'frontend';
   private isEmployee: boolean;
 
   get front() {
-    if (localStorage.getItem("user") === "\"admin\"") {
-        return false;
+    if (localStorage.getItem('user') === '"admin"') {
+      return false;
     }
     return true;
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.isEmployeeF();
+  }
+
+  isEmployeeF() {
     this.isEmployee = localStorage.getItem('role') === 'employee';
+    return this.isEmployee;
   }
 }
