@@ -33,6 +33,8 @@ export class SearchComponentComponent implements OnInit {
   }
 
   searchForFreeRooms({value, valid}) {
+    this.Rooms = [];
+    this.averageCosts = [];
     let UserID = {
       'userId': localStorage.getItem('userID')
     };
@@ -62,9 +64,20 @@ export class SearchComponentComponent implements OnInit {
     this.isTableShown = false;
   }
 
-  addRoomReservation(id, i) {
-    this.Rooms.push(this.availRooms[i].id);
-    this.averageCosts.push(this.availRooms[i].pricePerNightWithSeasoningSystem);
+  addRoomReservation(room) {
+    this.Rooms.push(room.id);
+    this.averageCosts.push(room.pricePerNightWithSeasoningSystem);
+  }
+
+  removeRoomFromReservation(room) {
+    const roomIndex = this.Rooms.indexOf(room.id);
+    const costIndex = this.averageCosts.indexOf(room.pricePerNightWithSeasoningSystem);
+    if (roomIndex > -1) {
+      this.Rooms.splice(roomIndex, 1);
+    }
+    if (costIndex > -1) {
+      this.averageCosts.splice(costIndex, 1);
+    }
   }
 
   makeReservation() {
@@ -99,5 +112,10 @@ export class SearchComponentComponent implements OnInit {
         console.log('An error occured');
       }
     );
+    this.hideTable();
+  }
+
+  isRoomAdded(id: any) {
+    return this.Rooms.includes(id);
   }
 }
