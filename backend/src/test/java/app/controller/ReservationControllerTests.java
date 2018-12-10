@@ -2,7 +2,9 @@
 package app.controller;
 
 import app.entity.Reservation;
+import app.entity.ReservationDTO;
 import app.entity.User;
+import app.repository.UserRepository;
 import app.service.ReservationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
@@ -37,6 +40,12 @@ public class ReservationControllerTests {
     @Mock
     ReservationService reservationService;
 
+    @Autowired
+    ReservationService reservationService2;
+
+    @Autowired
+    UserRepository userRepository;
+
     @Test
     public void test_getAllReservations_statusShouldBeOK() throws Exception {
 
@@ -46,12 +55,42 @@ public class ReservationControllerTests {
 
     @Test
     public void test_geReservationsForUser_statusShouldBeOK() throws Exception {
-        Reservation reservation = prepareReservetion();
+        Reservation reservation = prepareReservation();
         List reservationList = new ArrayList();
         reservationList.add(reservation);
         when(reservationService.getReservationForUser(1)).thenReturn(reservationList);
         this.mockMvc.perform(get("/reservation//get/{userId}", 1))
                 .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    @Sql(scripts = "classpath:createUser.sql", executionPhase = BEFORE_TEST_METHOD)
+    @Sql(scripts = "classpath:deleteReservation.sql", executionPhase = AFTER_TEST_METHOD)
+    public void test_AddReservation_statusShouldBeOK()  {
+        ReservationDTO reservation = prepareReservationDTO();
+        Reservation savedReservation = reservationService2.addNewReservation(reservation);
+        assertTrue(savedReservation.getReservationIdList().isEmpty());
+        assertEquals(savedReservation.getEndDate(), reservation.getEndDate());
+        assertEquals(savedReservation.getStartDate(), reservation.getStartDate());
+        assertEquals(savedReservation.getUser().getUser_id(), reservation.getUserId());
+        assertFalse(savedReservation.isPayed());
+
+
+    }
+
+    private ReservationDTO prepareReservationDTO() {
+        ReservationDTO reservationDTO = new ReservationDTO();
+        List<Integer> rooms = new ArrayList<>();
+        List<Double> averageCost = new ArrayList<>();
+        averageCost.add((double) 50);
+        reservationDTO.setId(1000);
+        reservationDTO.setPayed(false);
+        reservationDTO.setStartDate(LocalDate.now());
+        reservationDTO.setEndDate(LocalDate.now());
+        reservationDTO.setUserId(1000);
+        reservationDTO.setRooms(rooms);
+        reservationDTO.setAverageCosts(averageCost);
+        return reservationDTO;
     }
 
 
@@ -63,7 +102,7 @@ public class ReservationControllerTests {
                 .andDo(print()).andExpect(status().isOk());
     }
 
-    private Reservation prepareReservetion() {
+    private Reservation prepareReservation() {
         Reservation reservation = new Reservation();
         reservation.setPayed(false);
         reservation.setStartDate(LocalDate.now());
@@ -73,5 +112,4 @@ public class ReservationControllerTests {
         reservation.setUser(user);
         return reservation;
     }
-
 }
