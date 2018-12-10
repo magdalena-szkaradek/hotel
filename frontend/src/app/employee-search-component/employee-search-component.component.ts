@@ -35,7 +35,10 @@ export class EmployeeSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getClientDetails().subscribe(data => {this.clientsDetails = data; console.log(this.clientsDetails);});
+    this.userService.getClientDetails().subscribe(data => {
+      this.clientsDetails = data;
+      console.log(this.clientsDetails);
+    });
   }
 
   searchForFreeRooms({value, valid}) {
@@ -85,7 +88,6 @@ export class EmployeeSearchComponent implements OnInit {
   }
 
   makeReservation() {
-    this.hideTable();
     let UserID = {'userId': Number(this.userId)};
     let resDates = {
       'startDate': this.beginnigDate,
@@ -94,16 +96,15 @@ export class EmployeeSearchComponent implements OnInit {
     let roomsToReserve = {
       'rooms': this.Rooms
     };
-
     let allCost = {
       'averageCosts': this.averageCosts
     };
 
     var merged = Object.assign(UserID, resDates);
+
     var merged1 = Object.assign(merged, roomsToReserve);
     var merged2 = Object.assign(merged1, allCost);
     console.log(merged2);
-
     this.roomService.addReservation(merged2).subscribe(res => {
         this.successMsg = true;
         setTimeout(function () {
@@ -112,7 +113,13 @@ export class EmployeeSearchComponent implements OnInit {
       },
       () => {
         this.errorMsg = true;
-        console.log('An error occured'); }
+        console.log('An error occured');
+      }
     );
+    this.hideTable();
+  }
+
+  isRoomAdded(id: any) {
+    return this.Rooms.includes(id);
   }
 }

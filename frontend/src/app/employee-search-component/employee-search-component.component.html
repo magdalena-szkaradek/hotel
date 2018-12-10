@@ -9,33 +9,33 @@
               <div class="form-group">
                 <label>Arrival</label>
                 <div class="form-field">
-                  
+
                   <input type="date" class="form-control"
-                  name="startDate"
-                  [(ngModel)]="startDate"
-                  #userStartDate="ngModel"       
-                  required>
+                         name="startDate"
+                         [(ngModel)]="startDate"
+                         #userStartDate="ngModel"
+                         required>
                 </div>
               </div>
               <div class="alert alert-danger" *ngIf="userStartDate.errors?.required && userStartDate.touched">
                 You must specify arrival date.
-            </div>
+              </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Departure</label>
                 <div class="form-field">
-                  <input type="date" class="form-control" 
-                  name="endDate"
-                  [(ngModel)]="endDate"
-                  #userEndDate="ngModel"       
-                  required
-                 >
+                  <input type="date" class="form-control"
+                         name="endDate"
+                         [(ngModel)]="endDate"
+                         #userEndDate="ngModel"
+                         required
+                  >
                 </div>
               </div>
               <div class="alert alert-danger" *ngIf="userEndDate.errors?.required && userEndDate.touched">
                 You must specify departure date.
-            </div>
+              </div>
             </div>
           </div>
           <div class="row mb30">
@@ -44,15 +44,15 @@
                 <label for="guests">Guests</label>
                 <div class="form-field">
                   <input type="number" name="guests" id="guests" class="form-control" min="1" max="50"
-                  [(ngModel)]="guests"
-                  #userGuests="ngModel"       
-                  required>
+                         [(ngModel)]="guests"
+                         #userGuests="ngModel"
+                         required>
                 </div>
               </div>
 
               <div class="alert alert-danger" *ngIf="userGuests.errors?.required && userGuests.touched">
                 You must specify number of guests.
-            </div>
+              </div>
             </div>
           </div>
 
@@ -62,14 +62,17 @@
                 <label for="userId">Client</label>
                 <div class="form-field">
                   <select name="userId" id="userId" class="form-control" [(ngModel)]="selectedUser">
-                    <option *ngFor="let clientDetail of clientsDetails" [value]="clientDetail.userId">{{clientDetail.nameAndSurname}}</option>
+                    <option *ngFor="let clientDetail of clientsDetails" [value]="clientDetail.userId">
+                      {{clientDetail.nameAndSurname}}
+                    </option>
                   </select>
+                </div>
               </div>
             </div>
           </div>
-          </div>
           <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="Search" (click)="showTable()">
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="Search"
+                   (click)="showTable()">
           </div>
         </form>
       </div>
@@ -78,18 +81,18 @@
 </section>
 
 <!-- <form novalidate #f="ngForm" (ngSubmit)="reserveRooms(f)"> -->
-    
+
 <table id="roomsTable" class="table" *ngIf="isTableShown">
-    
+
   <tr bgcolor="#f9f9f9">
-      <th>Action</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Season price</th>
-      <th>Beds</th>
-      <th>Extra paid days</th>
-      <th>Normal paid days</th>
-      <th>Id </th>
+    <th>Action</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Season price</th>
+    <th>Beds</th>
+    <th>Extra paid days</th>
+    <th>Normal paid days</th>
+    <th>Id</th>
   </tr>
 
 
@@ -98,29 +101,32 @@
       <button *ngIf="!isRoomAdded(room.id)" type="button" (click)="addRoomReservation(room)">Add room</button>
       <button *ngIf="isRoomAdded(room.id)" type="button" (click)="removeRoomFromReservation(room)">Remove room</button>
     </td>
-      <td>
-         {{ room?.pricePerNightWithoutSeasoningSystem }}
-     </td>
-     <td>
-     {{ room?.pricePerNightWithSeasoningSystem }}
-  </td>
-     <td>
-        {{ room?.beds }}
-     </td>
-     <td>
+    <td>
+      {{ room?.pricePerNightWithoutSeasoningSystem }}
+    </td>
+    <td>
+      {{ room?.pricePerNightWithSeasoningSystem }}
+    </td>
+    <td>
+      {{ room?.beds }}
+    </td>
+    <td>
       {{ room?.extraPaidDays }}
-   </td>
-   <td>
-    {{ room?.normalPaidDays }}
- </td>  
- <td>
-    {{ room?.id }}
- </td>       
+    </td>
+    <td>
+      {{ room?.normalPaidDays }}
+    </td>
+    <td>
+      {{ room?.id }}
+    </td>
   </tr>
 </table>
 
-<button  id="makeReservationButton" type="button" *ngIf="isTableShown" (click)="makeReservation()"> Make reservation</button> 
-<button id="roomsTableButton" type="button" *ngIf="isTableShown" (click)="hideTable()"> Hide information about available rooms</button>
+<button id="makeReservationButton" type="button" *ngIf="isTableShown" (click)="makeReservation()"> Make reservation
+</button>
+<button id="roomsTableButton" type="button" *ngIf="isTableShown" (click)="hideTable()"> Hide information about available
+  rooms
+</button>
 <div class="alert alert-success" *ngIf="successMsg">
   <p>Reservation was made.</p>
 </div>
